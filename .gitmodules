@@ -1,3 +1,6 @@
 [submodule "inshi-nas"]
 	path = inshi-nas
 	url = git@github.com:diohabara/Inshi-Ans.git
+[submodule "ans"]
+	path = ans
+	url = git@github.com:diohabara/inshi-ans.git
