@@ -1,0 +1,3 @@
+[submodule "inshi-nas"]
+	path = inshi-nas
+	url = git@github.com:diohabara/Inshi-Ans.git
