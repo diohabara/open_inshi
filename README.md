@@ -14,7 +14,7 @@
   - 例: `2014_s_written_ans.pdf`(上の創造情報学専攻への解答)
   - `LaTeX`で作り、`PDF`にコンパイルする。
 
-## 東大
+## 東京大学大学院
 
 ### [総合文化研究科](./the_university_of_tokyo/graduate_school_of_arts_and_sciences)
 
