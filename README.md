@@ -7,14 +7,38 @@
 - ディレクトリ名は`_`(アンダーバー)区切りで、できるだけ公式の名前にする。
   - 例: `the_university_of_tokyo`(東京大学)
   - 例: `creative_informatics`(創造情報学専攻)
-- 問題ファイル名は`year_{s,w}[_type][_lang].pdf`とする。ただし、西暦で、開催された年度とする。
+  
+- 問題ファイル名は`year_${season}[_type][_lang].pdf`とする。ただし、西暦で、開催された年度とする。
   - 例: `2019_s_1.pdf`(東京大学大学院情報理工学系研究科コンピュータ科学専攻 2020年度夏入試  専門科目I)
   - 例: `2014_s_written.pdf`(東京大学大学院情報理工学系研究科創造情報学専攻 2015年度夏入試 筆記)
+  
 - 解答ファイル名は問題ファイル名に`_ans`を加える。
   - 例: `2014_s_written_ans.pdf`(上の創造情報学専攻への解答)
   - `LaTeX`で作り、`PDF`にコンパイルする。
 
+## [一橋大学大学院](./hitotsubashi_university)
+
+### [経済学研究科](./hitotsubashi_university/graduate_school_of_economics)
+
+  [公式の過去問置き場](https://www.econ.hit-u.ac.jp/jpn/page/examinee/graduate_admissions/past_exam.html)
+
+## [北海道大学](./hokkaido_university)
+
+### [経済学研究科](./hokkaido_university/graduate_school_of_economics_and_business)
+
+  [公式の過去問置き場](https://www.econ.hokudai.ac.jp/e_exam/daigakuin/pqc/)
+
+## [慶応大学](./keio_university)
+
+### [経済学研究科](./keio_university/graduate_school_of_economics)
+
+[公式の過去問置き場](.https://www.keio.ac.jp/ja/grad-admissions/masters/past-exams/)
+
 ## [京都大学大学院](./kyoto_university)
+
+### [経済学研究科](./kyoto_university/graduate_school_of_economics)
+
+[公式の過去問置き場](https://www.econ.kyoto-u.ac.jp/top/in-kakomon/)
 
 ### [情報学研究科](./kyoto_university/graduate_school_of_informatics)
 
@@ -82,6 +106,10 @@
   > 令和2年度(令和元年度実施)入試から、基礎学力（数学、情報基礎）は、口述試験で試問します。出題範囲や口述試験の説明は、[このページ](https://www.cs.tsukuba.ac.jp/admission.html)をご覧ください。
 
 ## [早稲田大学大学院](./waseda_university)
+
+### [経済学研究科](/waseda_university/graduate_school_of_economics)
+
+[公式の過去問置き場](https://www.waseda.jp/inst/admission/graduate/past_test/)
 
 ### [基幹理工学研究科](/Users/jio/repo/github.com/diohabara/open_inshi/waseda_university/graduate_school_of_fundamental_science_and_engineering)
 
