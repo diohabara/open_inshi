@@ -32,7 +32,7 @@
 
 ### [経済学研究科](./keio_university/graduate_school_of_economics)
 
-[公式の過去問置き場](.https://www.keio.ac.jp/ja/grad-admissions/masters/past-exams/)
+[公式の過去問置き場](https://www.keio.ac.jp/ja/grad-admissions/masters/past-exams/)
 
 ## [京都大学大学院](./kyoto_university)
 
