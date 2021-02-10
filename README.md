@@ -1,20 +1,44 @@
 # open_inshi
 
-大学院入試の問題とその解答
+大学院入試の問題とその解答。
+
+## 環境構築
+
+以下のソフトをインストールしておく。
+
+- `tectonic`
+- `npm`
+
+その後、 `npm install` で `textlint` とそのプリセットルールがインストールされる。
+
+## 参考
+
+[sample.tex](sample.tex)を参考にして解答を作る。
 
 ## 規約
 
-- ディレクトリ名は`_`(アンダーバー)区切りで、できるだけ公式の名前にする。
+- ディレクトリ名は `_` (アンダーバー)区切りで、できるだけ公式の名前にする。
   - 例: `the_university_of_tokyo`(東京大学)
   - 例: `creative_informatics`(創造情報学専攻)
 
-- 問題ファイル名は`year_${season}[_type][_lang].pdf`とする。ただし、西暦で、開催された年度とする。
-  - 例: `2019_s_1.pdf`(東京大学大学院情報理工学系研究科コンピュータ科学専攻 2020年度夏入試  専門科目I)
-  - 例: `2014_s_written.pdf`(東京大学大学院情報理工学系研究科創造情報学専攻 2015年度夏入試 筆記)
+- 問題ファイル名は `year_${season}[_type][_lang].pdf` とする。ただし、西暦で、開催された年度とする。
+  - 例: `2019_s_1.pdf`(東京大学大学院情報理工学系研究科コンピュータ科学専攻 2020 年度夏入試  専門科目 I)
+  - 例: `2014_s_written.pdf`(東京大学大学院情報理工学系研究科創造情報学専攻 2015 年度夏入試筆記)
 
-- 解答ファイル名は問題ファイル名に`_ans`を加える。
+- 解答ファイル名は問題ファイル名に `_ans` を加える。
   - 例: `2014_s_written_ans.pdf`(上の創造情報学専攻への解答)
   - `LaTeX`で作り、`PDF`にコンパイルする。
+
+## 編集方針
+
+- このレポジトリを fork する。
+- ブランチを切る。
+  - ブランチ名は `{username}/{filename}` とする。
+- 解答を `tex` で書く。
+  - `pdf` を手元で確認しても良いが、 `push` するのは `tex` のみ。
+- Pull request を作る。
+- 他の人に見てもらう。
+- 他の人から OK をもらったら merge する。
 
 ## [一橋大学大学院](./hitotsubashi_university)
 
@@ -71,7 +95,7 @@
 [公式の過去問置き場](https://www.i.u-tokyo.ac.jp/edu/entra/examarchive.shtml)
 
 - [一般教育科目(数学)](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/math)
-  - オンライン入試になり2020年から実施されていない
+  - オンライン入試になり 2020 年から実施されていない
 - [コンピュータ科学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/computer_science)
 - [創造情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
 - [電子情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
