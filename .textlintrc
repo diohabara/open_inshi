@@ -13,6 +13,9 @@
       "no-doubled-joshi": {
          "strict": false,
          "allow": ["か"], // 助詞のうち「か」は複数回の出現を許す(e.g.: するかどうか)
+      },
+      "max-kanji-continuous-len" : {
+        "max" : 100
       }
     },
     "preset-ja-spacing": {
@@ -29,8 +32,5 @@
       "allowPeriodMarks": [":"],
     },
     "ja-technical-writing/sentence-length": false, //100文字数制限の無効化
-    "max-kanji-continuous-len": {
-      max: 100
-    }
   }
 }

@@ -6,10 +6,10 @@
 
 以下のソフトをインストールしておく。
 
-- `tectonic`
-- `npm`
+- [`tectonic`](https://github.com/tectonic-typesetting/tectonic)
+- [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-その後、 `npm install` で `textlint` とそのプリセットルールがインストールされる。
+その後、 `npm install` このディレクトリで実行すると `textlint` とそのプリセットルールがインストールされる。
 
 ## 参考
 
