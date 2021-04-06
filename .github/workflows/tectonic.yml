@@ -42,9 +42,13 @@ jobs:
         git config --global user.email "diohabara@gmail.com"
         git remote set-url origin https://diohabara:${GITHUB_TOKEN}@github.com/diohabara/open_inshi.git
         git switch -c dev
-        git add .
-        git commit -m '[GitHub Actions]: Add a new PDF'
-        git pull origin master
-        git pull origin HEAD
-        git pull origin dev
-        git push origin HEAD
+        if [ -n "$(git status --porcelain)" ]; then
+          git add .
+          git commit -m '[GitHub Actions]: Add a new PDF'
+          git pull origin master
+          git pull origin HEAD
+          git pull origin dev
+          git push origin HEAD
+        else
+          echo nothing to stage
+        fi
