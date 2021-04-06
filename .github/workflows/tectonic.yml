@@ -17,7 +17,7 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.head_ref }}
+        ref: ${{ github.base_ref }}
         persist-credentials: false
         fetch-depth: 0
 
@@ -35,7 +35,17 @@ jobs:
           tectonic  ${file}
         done
 
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Add a new PDF
-        branch: dev
+    - name: 'Actions commit and push'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "diohabara"
+        git config --global user.email "diohabara@gmail.com"
+        git remote set-url origin https://diohabara:${GITHUB_TOKEN}@github.com/diohabara/open_inshi.git
+        git switch -c dev
+        git add .
+        git commit -m '[GitHub Actions]: Add a new PDF'
+        git pull origin master
+        git pull origin HEAD
+        git pull origin dev
+        git push origin HEAD
