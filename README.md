@@ -33,7 +33,8 @@
 
 - このレポジトリを fork する。
 - ブランチを切る。
-  - ブランチ名は `{username}/{filename}` とする。
+  - ブランチ名は `{username}/{university_name}{major}{filename}` とする。
+    - 例: `diohabara/ut_eeic_2019_s_ans`
 - 解答を `tex` で書く。
   - `pdf` を手元で確認しても良いが、 `push` するのは `tex` のみ。
 - Pull request を作る。
