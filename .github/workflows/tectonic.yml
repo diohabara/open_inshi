@@ -29,9 +29,10 @@ jobs:
 
     - name: 'Compilation'
       run: |
-        for file in $(git diff origin/${TARGET_BRANCH} HEAD --diff-filter=AM --name-only -- "*.tex") ; do
+        for file in $(git diff origin/master HEAD --diff-filter=AM --name-only -- "*.tex") ; do
           tectonic  ${file}
         done
+
     - name: 'Commit and push'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
