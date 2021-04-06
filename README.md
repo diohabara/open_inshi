@@ -26,7 +26,7 @@
   - 例: `2014_s_written.pdf`(東京大学大学院情報理工学系研究科創造情報学専攻 2015 年度夏入試筆記)
 
 - 解答ファイル名は問題ファイル名に `_ans` を加える。
-  - 例: `2014_s_written_ans.pdf`(上の創造情報学専攻への解答)
+  - 例: `2014_s_written_ans.tex`(上の創造情報学専攻への解答)
   - `LaTeX`で作り、`PDF`にコンパイルする。
 
 ## 編集方針
@@ -141,4 +141,3 @@
 
 - [情報理工･情報通信専攻](./waseda_university/graduate_school_of_fundamental_science_and_engineering/department_of_communications_and_computer_engineering)
 - [数学応用数理専攻](./waseda_university/graduate_school_of_fundamental_science_and_engineering/department_of_pure_and_applied_mathematics)
-
