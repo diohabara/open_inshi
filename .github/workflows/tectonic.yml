@@ -42,8 +42,9 @@ jobs:
         git config --global user.email "tectonic@githubaction.diohabara.com"
         git remote set-url origin https://diohabara:${GITHUB_TOKEN}@github.com/diohabara/open_inshi.git
         git switch -c dev
-        git pull origin master
         git add .
         git commit -m 'Add a new PDF'
+        git pull origin master
+        git pull origin HEAD
         git push origin HEAD
 
