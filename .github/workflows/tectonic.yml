@@ -17,6 +17,7 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
       with:
+        ref: ${{ github.head_ref }}
         persist-credentials: false
         fetch-depth: 0
 
