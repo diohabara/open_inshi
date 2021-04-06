@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - '**.tex'
-      - '**.yml'
 
 env:
   TARGET_BRANCH: ${{ github.base_ref }}
