@@ -1,0 +1,214 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage[dvipdfmx]{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 令和元年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\subsection*{(1)}
+
+% ref: https://jeea.or.jp/course/contents/01133/
+
+スイッチを短絡させると、以下の回路方程式が成り立つ。
+
+\[
+  L \frac{d i(\tau)}{d \tau} = v(t)
+\]
+
+電源は定電圧電源なので \(v(t) = v(0) = E\) であり、 \(\tau = [0, t]\) 上で \(\tau\) に関して積分して整理すると
+
+\[
+  i(t) - i(0) = \frac{E}{L}t
+\]
+
+問題文より $t = 0$ で $i(0) = 0$ だから
+
+\[
+  i(t) = \frac{E}{L}t
+\]
+
+\subsection*{(2)}
+
+スイッチを開放すると、 \(t = [T_0, T_0 + T_1)\) において以下の回路方程式が成り立つ。
+
+\[
+  L \frac{d i(t)}{d t} + \frac{1}{C}\int^{t}_{T_0}i(\tau) d \tau = E
+\]
+
+両辺を微分して整理すると
+
+\begin{equation*}
+  \begin{split}
+    0 &= L \frac{d^2 i(t)}{dt^2} + \frac{1}{C}i(t) \\
+    \frac{d^2 i(t)}{dt^2} &= - \frac{1}{LC} i(t)
+  \end{split}
+\end{equation*}
+
+よって、\(i(t)\)の一般解は
+
+\[
+  i(t) = A \sin{\frac{1}{\sqrt{LC}}}t+ B \cos{\frac{1}{\sqrt{LC}}}t
+\]
+
+と書ける。
+
+(1)より\(i(T_0) = \frac{E}{L}T_0\)であり\(\left.\frac{di(t)}{dt}\right|_{t=T_0}=0\)
+
+\(\frac{di(t)}{dt} = \frac{A}{\sqrt{LC}}\cos \frac{t}{\sqrt{LC}} - \frac{B}{\sqrt{LC}} \sin \frac{t}{\sqrt{LC}}\)より
+
+\[
+  \left.\frac{di(t)}{dt}\right|_{t=T_0} = \frac{A}{\sqrt{LC}}\cos \frac{T_0}{\sqrt{LC}} - \frac{B}{\sqrt{LC}} \sin \frac{T_0}{\sqrt{LC}} = 0
+\]
+
+よって
+
+\[
+  A = B \tan \frac{T_0}{\sqrt{LC}}
+\]
+
+また
+
+\begin{equation*}
+  \begin{split}
+    i(T_0)
+    &= \frac{A}{\sqrt{LC}}\cos \frac{T_0}{\sqrt{LC}} - \frac{B}{\sqrt{LC}} \sin \frac{T_0}{\sqrt{LC}} \\
+    &= B \left( \sin{\frac{T_0}{\sqrt{LC}}} \tan{\frac{T_0}{\sqrt{LC}}} + \cos{\frac{T_0}{\sqrt{LC}}} \right) \\
+    &= B \frac{\sin^2{\frac{T_0}{\sqrt{LC}}} + \cos^2{\frac{T_0}{\sqrt{LC}}}}{\cos{\frac{T_0}{\sqrt{LC}}}} \\
+    &= \frac{B}{\cos{\frac{T_0}{\sqrt{LC}}}}
+  \end{split}
+\end{equation*}
+
+よって、\(i(T_0) = \frac{E}{L}T_0\)より
+
+\begin{equation*}
+  \begin{split}
+    B &= \frac{E}{L}T_0 \cos{\frac{T_0}{\sqrt{LC}}} \\
+    A &= B \tan{\frac{T_0}{\sqrt{LC}}} = \frac{E}{L} T_0 \sin{\frac{T_0}{\sqrt{LC}}}
+  \end{split}
+\end{equation*}
+
+よって
+\begin{equation*}
+  \begin{split}
+    i(t)
+      &= \frac{E}{L} T_0 \sin{\frac{T_0}{\sqrt{LC}}} \sin{\frac{t}{LC}} + \frac{E}{L} T_0 \cos{\frac{T_0}{\sqrt{LC}}} \cos{\frac{t}{LC}}\\
+      &= \frac{E}{L} T_0 \cos{\frac{1}{\sqrt{LC}}} (t - T_0)
+  \end{split}
+\end{equation*}
+
+これが\(t \leq T_0\)で最初に\(0\)となるのは、\(\frac{1}{\sqrt{LC}}(t - T_0) = \frac{\pi}{2}\)のときなので
+
+\begin{equation*}
+  \begin{split}
+    &\frac{1}{\sqrt{LC}}((T_0 + T_1) - T_0) = \frac{\pi}{2} \\
+    &\therefore T_1 = \frac{\pi \sqrt{LC}}{2}
+  \end{split}
+\end{equation*}
+
+\subsection*{(3)}
+
+ダイオードがあるため、コンデンサにかかる電圧\(v(t)\)は常に単調増加する。\\
+したがって、スイッチを開放しているときにコイルに流れる電流の時間変化
+
+\[
+  \frac{di(t)}{dt} = \frac{E - v(t)}{L}
+\]
+
+\noindent
+は単調減少する。これはつまり、回数を重ねるごとにスイッチ解放後に電流が減少するスピードが早くなるということ。
+だから、\(i=0\)となるまでにかかる時間は\(T_1\)からどんどん短くなっていく。\\
+よって、各操作でスイッチを開放した後\(T_1\)時間後までに必ず\(i=0\)となっているはずなので、\(i(n(T_1 + T_0)) = 0\)と言える。
+
+\subsection*{(4)}
+
+簡単のため、\(v_k = v(k(T_0 + T_1))\)とおく。
+
+\(k(T_0 + T_1) \leq k (T_0 + T_1) + T_0\)のとき、回路に流れる電流は(1)と同様にして
+
+\begin{equation}
+  \begin{split}
+    E &= L \frac{d i(t)}{dt}, i(k(T_0 + T_1)) = 0 \\
+    \therefore i(t) &= \frac{E}{L}(t - k(T_0 + T_1))
+  \end{split}
+\end{equation}
+
+よって、\(t = k(T_0 + T_1) + T_0\)のとき\(i(t) = \frac{E}{L}T_0\)である。
+
+\(k(T_0 + T_1) + T_0 \leq t < (k+1) (T_0 + T_1)\)の間について、電源がした仕事とコイル･コンデンサのエネルギーの変化分は等しいので
+
+\[
+  E \cdot C(v_{k+1} - v_k) = \left(\frac{1}{2} L \cdot 0^2 + \frac{1}{2}C v_{k+1}^2\right) +
+    \left(\frac{1}{2} L (\frac{E}{L}T_0)^2 + \frac{1}{2}C v_{k}^2\right)
+\]
+
+\[
+  (v_{k+1} + E)^2 = (v_k - E)^2 + \frac{E^2}{LC} {T_0}^2
+\]
+
+\(v_0 = v(0) = E\)に注意してこれを解くと
+
+\begin{equation*}
+  \begin{split}
+    (v_n - E)^2 = n \cdot \frac{E^{2}}{LC}T_0^{2} \\
+    \therefore v_n = E \left(1 + T_0 \sqrt{\frac{n}{LC}} \right)
+  \end{split}
+\end{equation*}
+
+\section*{第2問\ 論理回路}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+
+\section*{第3問\ アルゴリズム}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+
+\section*{第4問\ ネットワーク}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+    \subsubsection*{(a)}
+    \subsubsection*{(b)}
+
+\section*{第5問\ 情報理論}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+  \subsection*{(6)}
+  \subsection*{(7)}
+
+\end{document}
+
