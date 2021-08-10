@@ -1,0 +1,101 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage[dvipdfmx]{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+%% url
+\usepackage{url}
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成25年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+
+\section*{第2問\ コンピュータ・アーキテクチャ}
+  \subsection*{(1)}
+    \subsubsection*{空間局所性}
+    あるメモリのデータが参照されたときに、そのデータの近くのアドレスが引き続き参照される性質。
+    \subsubsection*{時間局所性}
+    あるメモリのデータが参照されたときに、そのデータ短時間で再び参照される性質。
+  \subsection*{(2)}
+  ページテーブルとは主記憶上にある、仮想アドレスと物理アドレスの対応表である
+  \subsection*{(3)}
+  TLB、Translation Lookaside Bufferとはページテーブル専用のフルアソシアティブキャッシュである。高速にアドレス変換をするためにページテーブルの一部をTLB内に複製し変換する。TLB内に存在しないアドレスはページテーブルを参照する。
+  \subsection*{(4)}
+  \begin{enumerate}
+    \item アドレス計算をする。
+    \item TLBを参照する。TLBミスが起きる
+    \item ページテーブルを参照する。ページフォールトが起きる。
+    \item 例外を起こし、処理がOSに移る。
+    \item OSが特権的命令を用いてページテーブル、主記憶、二次記憶の書き換えを行う。
+    \item 命令実行を再開する。
+  \end{enumerate}
+  \subsection*{(5)}
+  TLBミスの処理はキャッシュ、主記憶上で処理が起きハードウェアのみでも済むが、ページフォールトは割り込みが生じOSへ処理が移り特権命令を用いるなどソフトウェアでも処理することが前提だから。
+
+\newpage
+\section*{第3問\ アルゴリズム}
+  \subsection*{(1)}
+  \begin{lstlisting}
+    def fib(n):
+        if n <= 1:
+            return n
+        else:
+            return fib(n-1) + fib(n-2)
+  \end{lstlisting}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+
+\section*{第4問\ ネットワーク}
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+    \subsubsection*{(a)}
+    \subsubsection*{(b)}
+
+\section*{第5問\ }
+  \subsection*{(1)}
+  \subsection*{(2)}
+  \subsection*{(3)}
+  \subsection*{(4)}
+  \subsection*{(5)}
+  \subsection*{(6)}
+  \subsection*{(7)}
+
+\begin{thebibliography}{99}
+  \bibitem{ca} 坂井修一 ｢コンピュータアーキテクチャ｣ \\
+    \url{https://www.coronasha.co.jp/np/isbn/9784339018431/}
+  \bibitem{ca_lec} \url{https://www.mtl.t.u-tokyo.ac.jp/~sakai/hard}
+\end{thebibliography}
+
+\end{document}
+
