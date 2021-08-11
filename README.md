@@ -96,7 +96,7 @@
 [公式の過去問置き場](https://www.i.u-tokyo.ac.jp/edu/entra/examarchive.shtml)
 
 - [一般教育科目(数学)](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/math)
-  - オンライン入試になり 2020 年から実施されていない
+  - オンライン入試になった 2020 年は実施されていない
 - [コンピュータ科学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/computer_science)
 - [創造情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
 - [電子情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
