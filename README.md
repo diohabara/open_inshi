@@ -34,12 +34,16 @@
 - このレポジトリを fork する。
 - ブランチを切る。
   - ブランチ名は `{username}/{university_name}{major}{filename}` とする。
-    - 例: `diohabara/ut_eeic_2019_s_ans`
+    - 例: `diohabara/ut_eeis_2019_s_ans`
 - 解答を `tex` で書く。
   - `pdf` を手元で確認しても良いが、 `push` するのは `tex` のみ。
 - Pull request を作る。
 - 他の人に見てもらう。
 - 他の人から OK をもらったら merge する。
+
+## 受験体験記
+
+[体験記一覧](./experience)
 
 ## [一橋大学大学院](./hitotsubashi_university)
 
