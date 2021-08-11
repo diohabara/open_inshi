@@ -19,6 +19,9 @@
 %% code
 \usepackage[ruled,vlined]{algorithm2e} % pseudo code
 \usepackage{listings} % source code
+\lstset{
+  basicstyle=\footnotesize,
+}
 %% url
 \usepackage{url}
 
@@ -62,7 +65,7 @@
 \newpage
 \section*{第3問\ アルゴリズム}
   \subsection*{(1)}
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python, caption=再帰呼び出し]
     def fib(n):
         if n <= 1:
             return n
@@ -70,7 +73,7 @@
             return fib(n-1) + fib(n-2)
   \end{lstlisting}
   \subsection*{(2)}
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python, caption=動的計画法]
     def fib(n):
         cache = [0] * n
         cache[1] = 1
@@ -82,14 +85,14 @@
     \subsubsection*{(1)の問題点}
     \begin{itemize}
       \item 時間計算量が\(O(n^2)\)である点。\\
-        再帰呼び出しの際に、2回再帰関数を呼び出している。そのため、\(n (> 1)\)で再帰関数を呼び出す回数が\(2^n\)となる。\\
+        再帰呼び出しの際に、2回再帰関数を呼び出している。そのため、\(n (> 1)\)で再帰関数を呼び出す回数が\(2^n\)となる。
       \item 再起呼び出しが深いことが原因で、スタックオーバーフローを起こす可能性がある。
       \item また、64ビット整数を用いて計算する際に答えがオーバーフローしてしまう可能性がある。
     \end{itemize}
     \subsubsection*{(2)の問題点}
     \begin{itemize}
       \item 空間計算量が\(O(n)\)である点。\\
-        再帰呼び出しによる実装と比べて、時間計算量は\(O(n)\)になり改善されている。一方、配列を用いるため空間計算量は\(O(n)\)となり問題として残っている。\\
+        再帰呼び出しによる実装と比べて、時間計算量は\(O(n)\)になり改善されている。一方、配列を用いるため空間計算量は\(O(n)\)となり問題として残っている。
       \item また、64ビット整数を用いて計算する際に答えがオーバーフローしてしまう可能性がある。
     \end{itemize}
   \subsection*{(4)}
@@ -115,12 +118,6 @@
   \subsection*{(5)}
   \subsection*{(6)}
   \subsection*{(7)}
-
-\begin{thebibliography}{99}
-  \bibitem{ca} 坂井修一 ｢コンピュータアーキテクチャ｣ \\
-    \url{https://www.coronasha.co.jp/np/isbn/9784339018431/}
-  \bibitem{ca_lec} \url{https://www.mtl.t.u-tokyo.ac.jp/~sakai/hard}
-\end{thebibliography}
 
 \end{document}
 
