@@ -8,7 +8,7 @@
 \usepackage{latexsym} % more mathematical notations
 \usepackage{physics} % physical notations
 %% graphs
-\usepackage[dvipdfmx]{graphicx, xcolor} % graph
+\usepackage{graphicx, xcolor} % graph
 \usepackage{circuitikz} % for circuit elements
 \usepackage{float} % positioning of graphs
 \usepackage{siunitx} % SI units
@@ -181,10 +181,109 @@
 
 \section*{第2問\ 論理回路}
   \subsection*{(1)}
+  AおよびBの最大値、最小値は以下の通り。
+  \begin{equation*}
+    \begin{split}
+      A_{max} &= 0111_{(2)} = 2^3 - 1 = 7_{(10)} \\
+      A_{min} &= 1000_{(2)} = -(1000 \oplus 1111 + 1)_{(2)} = -(111 + 1)_{(2)} = -8_{(10)} \\
+      B_{max} &= 01_{(2)} = 2^1 - 1 = 1_{(10)} \\
+      B_{min} &= 10_{(2)} = -(10 \oplus 11 + 1)_{(2)} = -(1 + 1)_{(2)} = -2_{(10)}
+    \end{split}
+  \end{equation*}
+
   \subsection*{(2)}
+  半加算器、全加算器は以下のブロックとして用いる。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=7cm]{images/ha_and_fa.png}
+  \end{figure}
+
+  半加算器は次の通りに構成される。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=5cm]{images/half_adder.png}
+  \end{figure}
+
+  全加算器は次の通りに構成される。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{images/full_adder.png}
+  \end{figure}
+
+  これらを使って構成できる$A+B$を計算して$Y$を得る回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/ripple_carry_adder.png}
+  \end{figure}
+
   \subsection*{(3)}
+  (2)で設計した回路がオーバフローするとき、$A_3 C_2 = 1$となる。\\
+  また、(2)の回路は以下の論理式を満たす。
+  \begin{equation*}
+    \begin{split}
+      &C_2 = A_2 C_1 \\
+      &C_1 = A_1 C_0 + A_1 B_1 + B_1 C_0 = C_0(A_1 + B_1) + A_1 B_1 \\
+      &C_0 = A_0 B_0
+    \end{split}
+  \end{equation*}
+  これらの式を代入して
+  \begin{equation*}
+    \begin{split}
+      &A_3 A_2 C_1 = 1 \\
+      &A_2 A_3 (C_0(A_1 + B_1) + A_1 B_1) = 1 \\
+      &A_2 A_3 (A_0 B_0(A_1 + B_1) + A_1 B_1) = 1
+    \end{split}
+  \end{equation*}
+  よって求めるオーバフロー検知機構の回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/overflow_detector.png}
+  \end{figure}
+
   \subsection*{(4)}
+  ビット値の符号を変換する際、それぞれの桁を反転させ$1$を加えれば良い。$A-B$を計算する際は、$A$と、$B$を反転させ1加えたものを(2)の回路で足し合わせれば良い。\\
+  よって、$A-B$を計算して$Y$を得る回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/ripple_carry_subtractor.png}
+  \end{figure}
+
   \subsection*{(5)}
+  $1$ビットの信号$D$でオーバフローかどうかを出力し、オーバフロー発生時に$1$、そうでないときに$0$を出力するとする。\\
+  (3)と同じように考え、$D=1$となるのは以下の論理式を満たす場合である。
+  \begin{equation*}
+    \begin{split}
+      &A_3 C_2 = 1 \\
+      &C_2 = A_2 C_1 \\
+      &C_1 = C_0 (A_1 + \bar{B_1}) + A_1 \bar{B_1} \\
+      &C_0 = A_0 + \bar{B_0}
+    \end{split}
+  \end{equation*}
+  これを解いて
+  \begin{equation*}
+    \begin{split}
+      &A_3 C_2 = 1 \\
+      &A_3 A_2 C_1 = 1 \\
+      &A_2 A_3 (C_0(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
+      &A_2 A_3 ((A_0 + \bar{B_0})(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
+      &A_2 A_3 (A_0A_1 + A_0 \bar{B_1} + A_1\bar{B_0} + \bar{B_0} \bar{B_1}) = 1 \\
+      &A_0A_1A_2A_3 + A_0A_2A_3\bar{B_1} + A_1A_2A_3\bar{B_0} + A_2A_3\bar{B_0}\bar{B_1} = 1 \\
+    \end{split}
+  \end{equation*}
+
+  以上からオーバフローが発生する入力パターンは以下の通り。ただし、*は$0$でも$1$でも良い。
+  \begin{center}
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    $A_0$ & $A_1$ & $A_2$ & $A_3$ & $B_0$ & $B_1$ \\ \hline
+    1  & 1  & 1  & 1  & *  & *  \\ \hline
+    1  & *  & 1  & 1  & *  & 0  \\ \hline
+    *  & 1  & 1  & 1  & 0  & *  \\ \hline
+    0  & 0  & 1  & 1  & 0  & 0  \\ \hline
+    *  & 1  & 1  & 1  & *  & 0  \\ \hline
+    \end{tabular}
+  \end{center}
 
 \section*{第3問\ アルゴリズム}
   \subsection*{(1)}
