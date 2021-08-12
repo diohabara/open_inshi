@@ -14,7 +14,7 @@
 
 ### 第 2 問
 
-回路、コンピュータ･アーキテクチャ
+論理回路、コンピュータ･アーキテクチャ
 
 - [坂井教授ホームページ](https://www.mtl.t.u-tokyo.ac.jp/~sakai/index-j.html)
 - [論理回路授業資料](http://www.mtl.t.u-tokyo.ac.jp/~sakai/ronri/)
