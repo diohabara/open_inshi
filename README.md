@@ -34,12 +34,16 @@
 - このレポジトリを fork する。
 - ブランチを切る。
   - ブランチ名は `{username}/{university_name}{major}{filename}` とする。
-    - 例: `diohabara/ut_eeic_2019_s_ans`
+    - 例: `diohabara/ut_eeis_2019_s_ans`
 - 解答を `tex` で書く。
   - `pdf` を手元で確認しても良いが、 `push` するのは `tex` のみ。
 - Pull request を作る。
 - 他の人に見てもらう。
 - 他の人から OK をもらったら merge する。
+
+## 受験体験記
+
+[体験記一覧](./experience)
 
 ## [一橋大学大学院](./hitotsubashi_university)
 
@@ -96,7 +100,7 @@
 [公式の過去問置き場](https://www.i.u-tokyo.ac.jp/edu/entra/examarchive.shtml)
 
 - [一般教育科目(数学)](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/math)
-  - オンライン入試になり 2020 年から実施されていない
+  - オンライン入試になった 2020 年は実施されていない
 - [コンピュータ科学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/computer_science)
 - [創造情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
 - [電子情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)

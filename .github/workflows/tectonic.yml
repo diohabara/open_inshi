@@ -16,6 +16,7 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
       with:
+        ref: ${{ github.base_ref }}
         persist-credentials: false
         fetch-depth: 0
 
@@ -29,18 +30,24 @@ jobs:
 
     - name: 'Compilation'
       run: |
-        for file in $(git diff origin/${TARGET_BRANCH} HEAD --diff-filter=AM --name-only -- "*.tex") ; do
+        for file in $(git diff origin/master HEAD --diff-filter=AM --name-only -- "*.tex") ; do
           tectonic  ${file}
         done
-    - name: 'Commit and push'
+
+    - name: 'Actions commit and push'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git config --global user.name "tectonic"
-        git config --global user.email "tectonic@githubaction.diohabara.com"
+        git config --global user.name "diohabara"
+        git config --global user.email "diohabara@gmail.com"
         git remote set-url origin https://diohabara:${GITHUB_TOKEN}@github.com/diohabara/open_inshi.git
         git switch -c dev
-        git add .
-        git commit -m 'Add a new PDF'
-        git push origin HEAD
-
+        if [ -n "$(git status --porcelain)" ]; then
+          git pull origin master
+          git add .
+          git commit -m '[GitHub Actions]: Add a new PDF'
+          git pull origin HEAD
+          git push origin HEAD
+        else
+          echo nothing to stage
+        fi

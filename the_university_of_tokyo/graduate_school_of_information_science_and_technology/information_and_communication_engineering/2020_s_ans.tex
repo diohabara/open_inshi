@@ -8,7 +8,7 @@
 \usepackage{latexsym} % more mathematical notations
 \usepackage{physics} % physical notations
 %% graphs
-\usepackage[dvipdfmx]{graphicx, xcolor} % graph
+\usepackage{graphicx, xcolor} % graph
 \usepackage{circuitikz} % for circuit elements
 \usepackage{float} % positioning of graphs
 \usepackage{siunitx} % SI units
@@ -19,6 +19,12 @@
 %% code
 \usepackage[ruled,vlined]{algorithm2e} % pseudo code
 \usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame=single
+}
 
 % Basic information
 \title{電子情報学専攻 \, 専門 \\ 令和元年 \, 解答･解説}
@@ -181,16 +187,187 @@
 
 \section*{第2問\ 論理回路}
   \subsection*{(1)}
+  AおよびBの最大値、最小値は以下の通り。
+  \begin{equation*}
+    \begin{split}
+      A_{max} &= 0111_{(2)} = 2^3 - 1 = 7_{(10)} \\
+      A_{min} &= 1000_{(2)} = -(1000 \oplus 1111 + 1)_{(2)} = -(111 + 1)_{(2)} = -8_{(10)} \\
+      B_{max} &= 01_{(2)} = 2^1 - 1 = 1_{(10)} \\
+      B_{min} &= 10_{(2)} = -(10 \oplus 11 + 1)_{(2)} = -(1 + 1)_{(2)} = -2_{(10)}
+    \end{split}
+  \end{equation*}
+
   \subsection*{(2)}
+  半加算器、全加算器は以下のブロックとして用いる。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=7cm]{images/ha_and_fa.png}
+  \end{figure}
+
+  半加算器は次の通りに構成される。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=5cm]{images/half_adder.png}
+  \end{figure}
+
+  全加算器は次の通りに構成される。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{images/full_adder.png}
+  \end{figure}
+
+  これらを使って構成できる$A+B$を計算して$Y$を得る回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/ripple_carry_adder.png}
+  \end{figure}
+
   \subsection*{(3)}
+  (2)で設計した回路がオーバフローするとき、$A_3 C_2 = 1$となる。\\
+  また、(2)の回路は以下の論理式を満たす。
+  \begin{equation*}
+    \begin{split}
+      &C_2 = A_2 C_1 \\
+      &C_1 = A_1 C_0 + A_1 B_1 + B_1 C_0 = C_0(A_1 + B_1) + A_1 B_1 \\
+      &C_0 = A_0 B_0
+    \end{split}
+  \end{equation*}
+  これらの式を代入して
+  \begin{equation*}
+    \begin{split}
+      &A_3 A_2 C_1 = 1 \\
+      &A_2 A_3 (C_0(A_1 + B_1) + A_1 B_1) = 1 \\
+      &A_2 A_3 (A_0 B_0(A_1 + B_1) + A_1 B_1) = 1
+    \end{split}
+  \end{equation*}
+  よって求めるオーバフロー検知機構の回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/overflow_detector.png}
+  \end{figure}
+
   \subsection*{(4)}
+  ビット値の符号を変換する際、それぞれの桁を反転させ$1$を加えれば良い。$A-B$を計算する際は、$A$と、$B$を反転させ1加えたものを(2)の回路で足し合わせれば良い。\\
+  よって、$A-B$を計算して$Y$を得る回路は次の通り。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=11cm]{images/ripple_carry_subtractor.png}
+  \end{figure}
+
   \subsection*{(5)}
+  $1$ビットの信号$D$でオーバフローかどうかを出力し、オーバフロー発生時に$1$、そうでないときに$0$を出力するとする。\\
+  (3)と同じように考え、$D=1$となるのは以下の論理式を満たす場合である。
+  \begin{equation*}
+    \begin{split}
+      &A_3 C_2 = 1 \\
+      &C_2 = A_2 C_1 \\
+      &C_1 = C_0 (A_1 + \bar{B_1}) + A_1 \bar{B_1} \\
+      &C_0 = A_0 + \bar{B_0}
+    \end{split}
+  \end{equation*}
+  これを解いて
+  \begin{equation*}
+    \begin{split}
+      &A_3 C_2 = 1 \\
+      &A_3 A_2 C_1 = 1 \\
+      &A_2 A_3 (C_0(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
+      &A_2 A_3 ((A_0 + \bar{B_0})(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
+      &A_2 A_3 (A_0A_1 + A_0 \bar{B_1} + A_1\bar{B_0} + \bar{B_0} \bar{B_1}) = 1 \\
+      &A_0A_1A_2A_3 + A_0A_2A_3\bar{B_1} + A_1A_2A_3\bar{B_0} + A_2A_3\bar{B_0}\bar{B_1} = 1 \\
+    \end{split}
+  \end{equation*}
+
+  以上からオーバフローが発生する入力パターンは以下の通り。ただし、*は$0$でも$1$でも良い。
+  \begin{center}
+    \centering
+    \begin{tabular}{ |l|l|l|l|l|l| }
+    \hline
+    $A_0$ & $A_1$ & $A_2$ & $A_3$ & $B_0$ & $B_1$ \\ \hline \hline
+    1  & 1  & 1  & 1  & *  & *  \\ \hline
+    1  & *  & 1  & 1  & *  & 0  \\ \hline
+    *  & 1  & 1  & 1  & 0  & *  \\ \hline
+    0  & 0  & 1  & 1  & 0  & 0  \\ \hline
+    *  & 1  & 1  & 1  & *  & 0  \\ \hline
+    \end{tabular}
+  \end{center}
 
 \section*{第3問\ アルゴリズム}
   \subsection*{(1)}
+  \begin{lstlisting}
+    if CONTAIN-INTEGERS(M, A, i, j) and (j - i <= end - start):
+        start = i
+        end = j
+  \end{lstlisting}
+  擬似コードの説明をする。\\
+  CONTAIN-INTEGERS(M, A, i, j)は条件を満たす部分配列かどうかを確認している。今for文内で調べている部分配列の長さは$j-i$であり、現在最短の部分配列の長さは$end-start$である。そのため、$j-i \leq end-start$を満たせば良い。これが2つ目の条件式である。\\
+  これらを満たす部分配列は最短かつ開始位置が最大であるから、startとendを更新する。
+
   \subsection*{(2)}
+  手元で確認すると以下のような結果となる。
+  \begin{center}
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    i & j & $A^{end}_{start}$ & start & end \\ \hline \hline
+    0 & 1 & <1, 1, 0, 1>    & 0     & 4   \\ \hline
+    0 & 2 & <1, 1, 0, 1>    & 0     & 3   \\ \hline
+    0 & 3 & <1, 1, 0>       & 0     & 3   \\ \hline
+    0 & 4 & <1, 1, 0>       & 0     & 3   \\ \hline
+    1 & 2 & <1, 1, 0>       & 0     & 3   \\ \hline
+    1 & 3 & <1, 0>          & 1     & 3   \\ \hline
+    1 & 4 & <1, 0>          & 1     & 3   \\ \hline
+    2 & 3 & <1, 0>          & 1     & 3   \\ \hline
+    2 & 4 & <0, 1>          & 2     & 4   \\ \hline
+    3 & 4 & <0, 1>          & 2     & 4   \\ \hline
+    \end{tabular}
+  \end{center}
+
   \subsection*{(3)}
+  \begin{lstlisting}[mathescape]
+  FIND-SNIPPET(N, M, A):
+      start = 0
+      end = N
+      j = 1
+      for i = 0 to N-1 do
+          while j - i <= 0 or (j < N and not CONTAIN-INTEGERS(M, A, i, j)):
+              j += 1
+          if CONTAIN-INTEGERS(M, A, i, j) and j - i <= end - start:
+              start = i
+              end = j
+      return $A^{end}_{start}$
+  \end{lstlisting}
+  擬似コードの説明をする。\\
+  two pointers techniqueを使う。for文で部分配列の左端を右にずらしていく。\\
+  while文では部分配列の右端をずらしている。最初の条件は部分配列の長さが0以下、つまり部分配列が存在しないことを意味し、このときに右端を伸ばして部分配列の長さが1以上となるようにする。
+  次の条件式はjが配列Aの右端でなく、問題の条件を満たさないことを意味する。よってこれは部分配列が問題の条件を満たすまで右端を伸ばすということ。
+  最後の条件式は(1)同様のもので、これで最短部分配列が求められることはわかった。\\
+  次にこの計算量が$O(N)$になることを説明する。\\
+  iは0からN-1まで移動し、jは1からNまで移動する。(1)のアルゴリズムと異なり、iもjも単調増加であり、i+jは一意となるので最大でも$N+N=2N$回のステップしか動作はしない。それぞれのステップで必要な計算は$O(1)$だから、全体で$O(N)$で動作する。
+
   \subsection*{(4)}
+  区間$[i, j]$で使われていない数を保持するスタックunusedと区間$[i, j]$に含まれる数の個数を保持する配列countを用意する。ただし、添字が数、値がその個数とする。\\
+  unusedを$\{0, 1, \dots, M-1\}$で初期化し、countはすべての要素を$0$で初期化する。\\
+  CONTAIN-INTEGERSは以下のような関数とする。
+  \begin{lstlisting}
+  CONTAIN-INTEGERS(M, A, i, j):
+      while stack:
+          number = stack.top()
+          if 0 < count[number]:
+              stack.pop()
+          else:
+              return False
+      return True
+  \end{lstlisting}
+  そして、iが右にずれるとき
+  \begin{lstlisting}
+    count[A[i]] -= 1
+    stack.push(A[i])
+  \end{lstlisting}
+  jが右にずれるとき
+  \begin{lstlisting}
+    count[A[j]] += 1
+  \end{lstlisting}
+  と処理する。この処理は各ステップが$O(1)$であり、CONTAIN-INTEGERSの処理も全体でO(N)回しか行われず、ならし計算量は$O(1)$となる。
 
 \section*{第4問\ ネットワーク}
   \subsection*{(1)}
@@ -203,12 +380,85 @@
 
 \section*{第5問\ 情報理論}
   \subsection*{(1)}
+  範囲$[-1, 1]$を均等に5分割しているので、$q_1,q_2,q_3,q_4,q_5$の領域はそれぞれ$[-1, -0.6]$、$[-0.6, -0.2]$、$[-0.2, 0.2]$、$[0.2, 0.6]$、$[0.6, 1]$である。\\
+  よって、それぞれの領域の図形の面積を計算して
+  \begin{equation*}
+    \begin{split}
+      q_1 = q_5 = /frac{1}{2} \cdot 0.4^{2} = \frac{2}{25} \\
+      q_2 = q_4 = /frac{1}{2} \cdot 0.8^{2}  - q_1 = \frac{6}{25} \\
+      q_3 = 1 - (q_1 + q_2 + q_4 + q_5) = \frac{9}{25}
+    \end{split}
+  \end{equation*}
+
   \subsection*{(2)}
+  エントロピーは$-\Sigma_{A \in \Omega} P(A) \log P(A)$と表せ、問題部により$\log 3 = 1.58, \log 5 = 2.32$だから求めるエントロピーは
+  \begin{equation*}
+    \begin{split}
+    -(2\frac{2}{25}\log \frac{2}{25} + 2 \frac{6}{25} \log \frac{6}{25} + \frac{9}{25} \log \frac{9}{25})
+    &= (\frac{4}{25}(\log 2 - 2 \log 5) + \frac{12}{25}(\log 2 + \log 3 - 2 \log 5) + \frac{9}{25}(2 \log 3 - 2 \log 5)) \\
+    &= (\frac{16}{25} \log 2 + \frac{30}{25} \log 3 - 2 \log 5) \\
+    &= -(0.64 + 1.896 - 4.64) = 2.104
+    \end{split}
+  \end{equation*}
+
   \subsection*{(3)}
+  ハフマン符号によって符号化する。$q_1$から$q_5$までをノードとして、最も確率の低いノードを合併し、それらのノードの確率の和を確率とするノードを作る。これをノードが最後の1つになるまで続ける。
+  そして、最後に残ったノードからたどって、左端のノードに戻る際に通ったエッジから符号を決める。上部のエッジを1、下部のエッジを0とする。これを図にすると以下のようになる。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{images/huffman_tree.png}
+  \end{figure}
+  よって、2元符号$C_0$は以下のように表せる。
+  \begin{center}
+    \begin{tabular}{ |l|l| }
+    \hline
+    \textit{$q_1$} & 000 \\ \hline
+    \textbf{$q_2$} & 01  \\ \hline
+    $q_3$          & 10  \\ \hline
+    $q_4$          & 11  \\ \hline
+    $q_5$          & 001 \\ \hline
+    \end{tabular}
+  \end{center}
+
   \subsection*{(4)}
+  (3)で求めた符号から求める符号長は
+  \[
+    2 \cdot 3 \frac{2}{25} + 2 \cdot 2 \frac{6}{25} + 2 \frac{9}{25} = 2.16
+  \]
+
   \subsection*{(5)}
+  エントロピーが最大となるとき、それぞれの信号値は等確率$\frac{1}{5}$となる。\\
+  よって、それぞれの信号値が$\frac{1}{5}$となるように$d_i$を求める。\\
+  $d_1 - d_0 = x_1(>0)$として、$\frac{1}{2}x_1^2 = \frac{1}{5}$となる。これを解いて$x_1 = \sqrt{\frac{2}{5}}$となる。よって、$d_1 = -1 + \sqrt{\frac{2}{5}}$となり、対称性から$d_2 = 1 - \sqrt{\frac{2}{5}}$\\
+  同様に考えて、$d_2 = -1 + \frac{2}{\sqrt{5}}, d_3 = 1 - \frac{2}{\sqrt{5}}$
   \subsection*{(6)}
+  量子化誤差は信号値と再生値の平均二乗誤差だから
+  \[
+    \int^{d_i}_{d_{i-1}}(x - x_i)^2 p(x) dx
+  \]
+  と書ける。
+  これを$x_i$に関して微分すると
+  \[
+    -2 \int^{d_i}_{d_{i-1}}x p(x) dx + 2 x_i \int^{d_i}_{d_{i-1}} p(x) dx
+  \]
+  となる。量子化誤差が最小のとき、これは0となるからこのときの$x_i=\tilde{x_i}$は以下のように表せる。
+  \[
+    \tilde{x_i} = \frac{\int^{d_i}_{d_{i-1}} x p(x) dx}{\int^{d_i}_{d_{i-1}} p(x) dx}
+  \]
+  以上より題意は示された。
+
   \subsection*{(7)}
+  (6)の式を使って求めると、それぞれ
+
+  \begin{equation*}
+    \begin{split}
+      \tilde{x_1} &= -1 + \frac{2\sqrt{10}}{15}\\
+      \tilde{x_2} &= -1 + \frac{8\sqrt{5}}{15}\\
+      \tilde{x_3} &= 0\\
+      \tilde{x_4} &= 1 - \frac{8\sqrt{5}}{15}\\
+      \tilde{x_5} &= 1 - \frac{2\sqrt{10}}{15}
+    \end{split}
+  \end{equation*}
 
 \end{document}
 
