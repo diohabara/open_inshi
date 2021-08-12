@@ -46,10 +46,13 @@
     あるメモリのデータが参照されたときに、そのデータの近くのアドレスが引き続き参照される性質。
     \subsubsection*{時間局所性}
     あるメモリのデータが参照されたときに、そのデータ短時間で再び参照される性質。
+
   \subsection*{(2)}
   ページテーブルとは主記憶上にある、仮想アドレスと物理アドレスの対応表である
+
   \subsection*{(3)}
   TLB、Translation Lookaside Bufferとはページテーブル専用のフルアソシアティブキャッシュである。高速にアドレス変換をするためにページテーブルの一部をTLB内に複製し変換する。TLB内に存在しないアドレスはページテーブルを参照する。
+
   \subsection*{(4)}
   \begin{enumerate}
     \item アドレス計算をする。
@@ -59,6 +62,7 @@
     \item OSが特権的命令を用いてページテーブル、主記憶、二次記憶の書き換えを行う。
     \item 命令実行を再開する。
   \end{enumerate}
+
   \subsection*{(5)}
   TLBミスの処理はキャッシュ、主記憶上で処理が起きハードウェアのみでも済むが、ページフォールトは割り込みが生じOSへ処理が移り特権命令を用いるなどソフトウェアでも処理することが前提だから。
 
@@ -72,6 +76,7 @@
         else:
             return fib(n-1) + fib(n-2)
   \end{lstlisting}
+
   \subsection*{(2)}
   \begin{lstlisting}[language=Python, caption=動的計画法]
     def fib(n):
@@ -81,6 +86,7 @@
             cache[i] = cache[i-1] + cache[i-2]
         return cache[n-1]
   \end{lstlisting}
+
   \subsection*{(3)}
     \subsubsection*{(1)の問題点}
     \begin{itemize}
@@ -95,11 +101,13 @@
         再帰呼び出しによる実装と比べて、時間計算量は\(O(n)\)になり改善されている。一方、配列を用いるため空間計算量は\(O(n)\)となり問題として残っている。
       \item また、64ビット整数を用いて計算する際に答えがオーバーフローしてしまう可能性がある。
     \end{itemize}
+
   \subsection*{(4)}
     \subsubsection*{一般項による計算の利点}
-    空間計算量、時間計算量が\(O(1)\)であり(2)の方法よりも計算の効率が良い
+    空間計算量が\(O(1)\)、時間計算量が繰り返し二乗法を用いて\(O(\log n)\)であり(2)の方法よりも計算の効率が良い
     \subsubsection*{一般項による計算の欠点}
-    浮動小数点数を用いて計算をするので誤差が生じる事があり、整数での計算となる(2)の方法よりも正確さに欠ける。
+    浮動小数点数を用いて計算をするので誤差が生じる事があり、整数での計算となる(2)の方法よりも正確さに欠ける。\\
+    64ビット整数を用いた場合よりも表現できる整数が少ない。
 
 \section*{第4問\ ネットワーク}
   \subsection*{(1)}
@@ -112,12 +120,104 @@
 
 \section*{第5問\ }
   \subsection*{(1)}
-  \subsection*{(2)}
-  \subsection*{(3)}
-  \subsection*{(4)}
-  \subsection*{(5)}
-  \subsection*{(6)}
-  \subsection*{(7)}
+  (両側)Z変換の定義は
+  \[
+    X(z) = \sum^{\infty}_{n=-\infty}x(n) z^{-n}
+  \]
+  (片側)Z変換の場合は
+  \[
+    X(z) = \sum^{\infty}_{n=0}x(n) z^{-n}
+  \]
 
+  \subsection*{(2)}
+  \begin{equation*}
+    \begin{split}
+      X'(z) &= \sum^{\infty}_{n=0}x(n-m)z^{-n} \\
+            &= \sum^{\infty}_{l=-m}x(l)z^{-l-m} \\
+            &= z^{-m} \sum^{\infty}_{l=0}x(l)z^{-l} \\
+            &= z^{-m} X(z)
+    \end{split}
+  \end{equation*}
+
+  \subsection*{(3)}
+  左右の$\oplus$に関して成り立つ方程式はそれぞれ次の通り。
+  \begin{equation}
+    \label{a}
+    q(n) = x(n) + a q(n-1)
+  \end{equation}
+  \begin{equation}
+    \label{b}
+    y(n) = b q(n) + q(n-1)
+  \end{equation}
+
+  \subsection*{(4)}
+  (3)の両辺をZ変換する。$x(n), y(n), q(n)$のZ変換をそれぞれ$X(z), Y(z), Q(z)$とする。\\
+  (\ref{a})のZ変換は
+  \begin{equation*}
+    \begin{split}
+      Q(z)
+        &= X(z) + \sum^{\infty}_{m=-1}aq(m)z^{-m-1} \\
+        &= X(z) + aq(-1) + a \sum^{\infty}_{m=0}q(m)z^{-m-1} \\
+        &= X(z) + aq_0 + a z^{-1}Q(z)
+    \end{split}
+  \end{equation*}
+  これを$Q(z)$について解いて
+  \begin{equation}
+    \label{c}
+    Q(z) = \frac{X(z) + aq_0}{1 - az^{-1}}
+  \end{equation}
+
+  (\ref{b})のZ変換は
+  \begin{equation*}
+    \begin{split}
+      Y(z)
+        &= bQ(z) + \sum^{\infty}_{m=-1}q(m)z^{-m-1} \\
+        &= bQ(z) + q(-1) + \sum^{\infty}_{m=0}q(m)z^{-m-1} \\
+        &= bQ(z) + q_0 + z^{-1}Q(z)
+    \end{split}
+  \end{equation*}
+  これを整理して
+  \begin{equation}
+    \label{d}
+    Y(z) = (b + z^{-1})Q(z) + q_0
+  \end{equation}
+
+  \subsection*{(5)}
+  (\ref{d})に(\ref{c})を代入して
+  \begin{equation*}
+    \begin{split}
+      Y(z)
+        &= (b + z^{-1})\frac{aq_0}{1 - az^{-1}} + q_0 \\
+        &= q_0 \frac{ab + az^{-1} + 1 - az^{-1}}{1 - az^{-1}} \\
+        &= q_0 \frac{1 + ab}{1 - az^{-1}}
+    \end{split}
+  \end{equation*}
+  $\frac{1}{1 - az^{-1}}$の逆変換が$a^n$であることから
+  \[
+    y(n) = q_0 (1 + ab) a^{n}
+  \]
+
+  \subsection*{(6)}
+  $q_0=0$であるとき今までの答えから
+  \begin{equation*}
+    \begin{split}
+      X(z) = \frac{1}{1 - z^{-1}} \\
+      Q(z) = \frac{X(z)}{1 - az^{-1}} \\
+      Y(z) = (b + z^{-1})Q(z)
+    \end{split}
+  \end{equation*}
+  $Y(z)$が求まるように計算をして
+  \begin{equation*}
+    \begin{split}
+      Y(Z)
+        &= \frac{b + z^{-1}}{(1 - az^{-1})(1 - z^{-1})} \\
+        &= \frac{\frac{ab+1}{a-1}}{1 - az^{-1}} + \frac{\frac{b+1}{1-a}}{1 - z^{-1}} \\
+        &= \frac{1}{a - 1}\left(\frac{ab+1}{1 - az^{-1}} + \frac{b+1}{1 - z^{-1}}  \right)
+    \end{split}
+  \end{equation*}
+  よって逆変換を行うと答え$y(n)$は得られ、次の通りになる。
+  \[
+    y(n) = \frac{1}{a-1}\left( (ab+1)a^{n} - (b+1)u(n) \right)
+  \]
 \end{document}
 
