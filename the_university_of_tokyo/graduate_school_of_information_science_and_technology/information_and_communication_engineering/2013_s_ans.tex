@@ -23,7 +23,7 @@
 \lstset{
   basicstyle=\footnotesize,
   numbers=left,
-  frame=single
+  frame={tb}
 }
 
 % Basic information
@@ -164,14 +164,82 @@ JKフリップフロップの特性表は以下の通りである。
 
 \section*{第3問\ アルゴリズム}
 \subsection*{(1)}
+  \subsubsection*{隣接行列による表現}
+  隣接行列とは行列の$i$行$j$列の成分が$1$であるとき頂点$i$から頂点$j$へ辺があり、$0$であるときはないことを表現している。
+  \[
+    \begin{bmatrix}
+    % 0   1   2   3   4   5
+      0 & 1 & 0 & 1 & 1 & 0 \\
+      0 & 0 & 1 & 1 & 0 & 1 \\
+      1 & 0 & 0 & 0 & 1 & 0 \\
+      0 & 0 & 1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 1 & 0 & 1 & 0 \\
+    \end{bmatrix}
+  \]
+
+  \subsubsection*{隣接リストによる表現}
+  隣接リストは各頂点から出ている辺の行き先をリストにして表現したもの。
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=9cm]{images/adjacency_list.png}
+  \end{figure}
 
 \subsection*{(2)}
+頂点の数を$|V|$とし辺の数を$|E|$とする。隣接行列、隣接リストで必要なメモリはそれぞれ$|V| \times |V|$、$|V| + |E|$である。\\
+この問題の場合、$|V| \times |V| = 6^2 = 36, |E| = 6 + 13 = 19$であるから、図1の有向グラフについてよりメモリ容量が必要な表現は隣接行列。
 
 \subsection*{(3)}
+(2)で説明したように、頂点数が$N$のとき辺の数を$x$として、隣接行列と隣接リストのメモリ容量が同じになるならば$N + x = N^2$が成り立つ。
+よって、$x = N(N - 1)$。\\
+また問題の条件から自己ループも多重辺もないので、ある頂点から伸びる辺は最大で$N-1$。頂点数は$N$であるからこの有向グラフの各頂点はそれ以外の全ての頂点と繋がっている。したがって、必ず弱連結となる。
 
 \subsection*{(4)}
+擬似コードに従って深さ優先探索をすると以下のような探索木が図示できる。\\
+ただし、探索した順番は上から下、左から右であり、丸ノードは探索に成功したノードで四角ノードは探索に失敗したノードである。
+\begin{center}
+  \begin{tikzpicture}[
+    level 1/.style={sibling distance=30mm},
+    level 2/.style={sibling distance=20mm},
+    level 3/.style={sibling distance=10mm},
+    node_ok/.style={circle,draw},
+    node_no/.style={rectangle,draw}
+  ]
+    \node[node_ok] {0}
+      child { node[node_ok] {1}
+        child { node[node_ok] {2}
+          child { node[node_no] {1} }
+          child { node[node_ok] {4}
+            child { node[node_no] {0} }
+          }
+        }
+        child { node[node_ok] {3}
+          child { node[node_no] {2} }
+          child { node[node_ok] {5} }
+        }
+      }
+    ;
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(5)}
+以下のように有向サイクルを検出するアルゴリズムは書ける。
+\begin{lstlisting}[language=Python, caption="有向サイクル検出アルゴリズム"]
+def find_cycle(vertices: list[Vertex], edges: list[Edge]) -> list[Vertex]:
+    for v in vertices:
+        for from_v, to_v in edges[v]:
+            cycle_vs = dfs(from_v, from_v, edges)
+            if cycle_vs:
+                return cycle_vs
+    return []
+
+def dfs(initial_v: Vertex, current: Vertex, edges: list[Edge]) -> list[Vertex]:
+    for from_v, to_v in edges[current]:
+        cycle_vs = dfs(initial_v, to_v, edges)
+        if initial_v == to_v:
+            return cycle_vs
+    return []
+\end{lstlisting}
 
 \section*{第4問\ ネットワーク}
 
