@@ -51,7 +51,7 @@ JKフリップフロップの特性表は以下の通りである。
   0 & 0 & Q (hold)           \\ \hline
   0 & 1 & 0 (reset)          \\ \hline
   1 & 0 & 1 (set)            \\ \hline
-  1 & 1 & $\bar{Q}$ (toggle) \\ \hline
+  1 & 1 & $\overline{Q}$ (toggle) \\ \hline
   * & * & Q (hold)           \\ \hline
   \end{tabular}
 \end{table}
@@ -115,10 +115,10 @@ JKフリップフロップの特性表は以下の通りである。
 
 \begin{equation*}
   \begin{split}
-    &J_0 = K_0 = \bar{Q}_2 \\
+    &J_0 = K_0 = \overline{Q_2} \\
     &J_1 = K_1 = Q_0 \\
     &J_2 = Q_1 Q_0 \\
-    &K_2 = \bar{Q}_2
+    &K_2 = \overline{Q_2}
   \end{split}
 \end{equation*}
 
@@ -148,10 +148,10 @@ JKフリップフロップの特性表は以下の通りである。
 
 \begin{equation*}
   \begin{split}
-    &J_0 = K_0 = Q_0 \bar{Q}_1 + \bar{Q}_0 Q_1 \\
-    &J_1 = K_1 = \bar{Q}_0 + \bar{Q}_1 Q_2 \\
+    &J_0 = K_0 = Q_0 \overline{Q_1} + \overline{Q_0} Q_1 \\
+    &J_1 = K_1 = \overline{Q_0} + \overline{Q_1} Q_2 \\
     &J_2 = Q_1 \\
-    &K_2 = \bar{Q}_0 \\
+    &K_2 = \overline{Q_0} \\
   \end{split}
 \end{equation*}
 
@@ -245,14 +245,172 @@ def dfs(initial_v: Vertex, current: Vertex, edges: list[Edge]) -> list[Vertex]:
 
 \section*{第5問\ 情報理論}
 \subsection*{(1)}
+状態遷移図は以下の通り。
+\begin{center}
+  \usetikzlibrary {automata,positioning}
+  \begin{tikzpicture}[
+      ->,
+      >={Stealth[round]},
+      auto,
+      every state/.style={draw}
+    ]
+    \node[state] (R) {R};
+    \node[state] (G) [below right=of R] {G};
+    \node[state] (B) [below left=of R] {B};
+
+    \path
+      (R)
+        edge node {0.2} (G)
+        edge [loop above] node {0.8} (R)
+      (G)
+        edge [loop right] node {0.9} (G)
+        edge node {0.1} (B)
+      (B)
+        edge [loop left] node {0.9} (B)
+        edge node {0.1} (R)
+    ;
+
+    \node [right=1cm,text width=7cm] at (G)
+    {
+      \begin{itemize}
+        \item Rの直後には、RとGのどちらかが、それぞれ0.8と0.2の確率で光る。
+        \item Gの直後には、GとBのどちらかが、それぞれ0.9と0.1の確率で光る。
+        \item Bの直後には、BとRのどちらかが、それぞれ0.9と0.1の確率で光る。
+      \end{itemize}
+    };
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(2)}
+求める定常状態確率をそれぞれ$\overline{P_R}$、$\overline{P_G}$
+、$\overline{P_B}$とする。\\
+状態遷移図から定常状態確率は次のような方程式が立てられる。
+
+\begin{equation*}
+  \begin{split}
+    \overline{P_R} &= 0.8 \overline{P_R} + 0.1 \overline{P_B} \\
+    \overline{P_G} &= 0.9 \overline{P_G} + 0.2 \overline{P_R} \\
+    \overline{P_B} &= 0.9 \overline{P_R} + 0.2 \overline{P_G}
+  \end{split}
+\end{equation*}
+
+変形して
+
+\begin{equation*}
+  \begin{split}
+    2\overline{P_R} &= \overline{P_B} \\
+    \overline{P_G} &= 2 \overline{P_R} \\
+    \overline{P_B} &= \overline{P_G}
+  \end{split}
+\end{equation*}
+
+とすると、$\overline{P_R} : \overline{P_G} : \overline{P_B} = 1 : 2 : 2$となる。
+したがって、$\overline{P_R} + \overline{P_G} + \overline{P_B} = 1$であるから
+\begin{equation*}
+  \begin{split}
+    \overline{P_R} &= 0.2 \\
+    \overline{P_G} &= 0.4 \\
+    \overline{P_B} &= 0.4 \\
+  \end{split}
+\end{equation*}
 
 \subsection*{(3)}
 
+状態遷移図より考えられる点灯を2つずつまとめた系列は$RR$、$RG$、$GG$、$GB$、$BB$、$BR$の6通りである。
+それぞれの系列の確率を$P_{RR}$、$P_{RG}$、$P_{GG}$、$P_{GB}$、$P_{BB}$、$P_{BR}$とおきこれらを最も効率が良くなるように符号を設計する。\\
+
+(2)より定常状態確率は求まっており、2つずつまとめた系列は1つ目の点灯から2つ目の点灯へ遷移する条件付き確率であるからそれぞれの確率は次の通り。
+
+\begin{equation*}
+  \begin{split}
+    P_{RR} &= 0.8 \overline{P_R} = 0.16 \\
+    P_{RG} &= 0.2 \overline{P_R} = 0.04 \\
+    P_{GG} &= 0.9 \overline{P_G} = 0.36 \\
+    P_{GB} &= 0.1 \overline{P_G} = 0.04 \\
+    P_{BB} &= 0.9 \overline{P_B} = 0.36 \\
+    P_{BR} &= 0.1 \overline{P_B} = 0.04 \\
+  \end{split}
+\end{equation*}
+
+以上より、確率が高いノードから低いノードに並べて、ノードのうち確率が最も低いノードを順番に合併させれば次のようにハフマン符号を設計できる。\\
+このとき、右端のノードから辿って左端のノードに行くとき上の辺を通るとき符号0、下の辺を通るとき符号1を付ければ2元符号は最も効率よく設計できる。\\
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/huffman_tree2013.png}
+\end{figure}
+
+2点灯系列あたりの平均符号長は
+\[
+  3P_{RR} + 4P_{RG} + 1P_{GG} + 5P_{GB} + 2P_{BB} + 5P_{BR} = 2.12
+\]
+よって、1点灯系列あたりの平均符号長は$1.06$[bit]
+
 \subsection*{(4)}
+% (3)と同様に系列ごとの確率を定め、定常状態確率から
+% \begin{equation*}
+%   \begin{split}
+%     P_{RG} &= 0.2 \overline{P_R} =  \\
+%     P_{RRG} &= 0.2 \cdot 0.8 \overline{P_R} = 0.04 \\
+%     P_{RRR} &= 0.8 \cdot 0.8 \overline{P_R} = 0.36 \\
+%     P_{GB} &= 0.1 \overline{P_G} = 0.04 \\
+%     P_{GGB} &= 0.1 \cdot 0.9 \overline{P_G} = 0.36 \\
+%     P_{GGG} &= 0.9 \cdot 0.9 \overline{P_G} = 0.04 \\
+%     P_{BR} &= 0.1 \overline{P_B} = 0.04 \\
+%     P_{BBR} &= 0.1 \cdot 0.9 \overline{P_B} = 0.36 \\
+%     P_{BBB} &= 0.9 \cdot 0.9 \overline{P_B} = 0.04 \\
+%   \end{split}
+% \end{equation*}
+TODO
 
 \subsection*{(5)}
+各々の色とその次の点灯についてのエントロピーは以下の通りになる。
+
+Rから始まるときのエントロピーは
+\begin{equation*}
+  \begin{split}
+    H_{R}
+      &= -(0.8 \log{\frac{8}{10}} + 0.2 \log{\frac{2}{10}}) \\
+      &= -(0.8 (\log 8 - \log10) + 0.2 (\log 2 - \log10)) \\
+      &= -(0.8 (3 - \log10) + 0.2 (1 - \log10)) \\
+      &= -(2.6 - \log10)
+  \end{split}
+\end{equation*}
+
+Gから始まるときのエントロピーは
+\begin{equation*}
+  \begin{split}
+    H_{G}
+      &= -(0.9 \log{\frac{9}{10}} + 0.1 \log{\frac{1}{10}}) \\
+      &= -(0.9 (\log 9 - \log 10) + 0.1 (\log 1 - \log 10)) \\
+      &= -(0.9 (2 \log 3 - \log 10) + 0.1 (0 - \log 10)) \\
+      &= -(1.8 \log 3 - \log 10) \\
+  \end{split}
+\end{equation*}
+
+Bから始まるときのエントロピーは
+\begin{equation*}
+  \begin{split}
+    H_{B}
+      &= -(0.9 \log{\frac{9}{10}} + 0.1 \log{\frac{1}{10}}) \\
+      &= -(0.9 (\log 9 - \log 10) + 0.1 (\log 1 - \log 10)) \\
+      &= -(0.9 (2 \log 3 - \log 10) + 0.1 (0 - \log 10)) \\
+      &= -(1.8 \log 3 - \log 10) \\
+  \end{split}
+\end{equation*}
+
+定常状態確率は(2)で求めた通り。以上から求めるエントロピー$H$は
+
+\begin{equation*}
+  \begin{split}
+    H &= 0.2 H_R + 0.4 H_G + 0.4 H_B \\
+      &= -(0.2 (2.6 - \log 10) + 0.8 (1.8 \log 3 - \log 10) \\
+      &= -(0.52 + 1.44 \log 3 - \log 10 ) \\
+      &= -(0.52 + 1.44 \log 3 - \log 2 - \log 5 ) \\
+      &= -(0.52 + 1.44 \cdot 1.58 - 1 - 2.32 ) \\
+      &= 0.5248
+  \end{split}
+\end{equation*}
 
 \end{document}
 
