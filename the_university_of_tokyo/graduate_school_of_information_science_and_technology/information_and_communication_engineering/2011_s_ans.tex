@@ -1,0 +1,100 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame={tb}
+}
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成22年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\section*{第2問\ 計算機アーキテクチャ}
+\subsection*{(1)}
+\subsubsection*{初期参照ミス}
+キャッシュラインを最初にアクセスしたときに起こるミス
+
+\subsubsection*{競合性ミス}
+同じインデックスを持つ異なるキャッシュラインにアクセスすることで起こるミス
+
+\subsubsection*{容量性ミス}
+キャッシュしたいライン数がキャッシュの容量を上回ることで起こるミス
+
+\subsection*{(2)}
+競合性ミス
+(フルアソシアティブキャッシュではインデックスを用いず、参照されるごとにすべてのラインのタグとメモリアドレス内のタグを比較するため。)
+
+\subsection*{(3)}
+1つのインデックスに対応するキャッシュラインの集合、セットの大きさを大きくする。つまり、連想度を大きくする。
+
+\subsection*{(4)}
+
+\subsection*{(5)}
+
+\subsection*{(6)}
+
+\subsection*{(7)}
+
+\subsection*{(8)}
+
+\subsection*{(9)}
+
+\subsection*{(10)}
+
+\subsection*{(11)}
+
+\subsection*{(12)}
+
+\section*{第3問\ アルゴリズムとデータ構造}
+\subsection*{(1)}
+
+\subsection*{(2)}
+
+\subsection*{(3)}
+
+\subsection*{(4)}
+
+\subsection*{(5)}
+
+\section*{第4問\ 情報通信}
+
+\section*{第5問\ 信号処理}
+\subsection*{(1)}
+
+\subsection*{(2)}
+
+\subsection*{(3)}
+
+\subsection*{(4)}
+
+\subsection*{(5)}
+
+\end{document}
+
