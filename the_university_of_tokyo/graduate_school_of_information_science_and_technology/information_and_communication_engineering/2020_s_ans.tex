@@ -261,8 +261,8 @@
     \begin{split}
       &A_3 C_2 = 1 \\
       &C_2 = A_2 C_1 \\
-      &C_1 = C_0 (A_1 + \bar{B_1}) + A_1 \bar{B_1} \\
-      &C_0 = A_0 + \bar{B_0}
+      &C_1 = C_0 (A_1 + \overline{B_1}) + A_1 \overline{B_1} \\
+      &C_0 = A_0 + \overline{B_0}
     \end{split}
   \end{equation*}
   これを解いて
@@ -270,10 +270,10 @@
     \begin{split}
       &A_3 C_2 = 1 \\
       &A_3 A_2 C_1 = 1 \\
-      &A_2 A_3 (C_0(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
-      &A_2 A_3 ((A_0 + \bar{B_0})(A_1 + \bar{B_1}) + A_1 \bar{B_1}) = 1 \\
-      &A_2 A_3 (A_0A_1 + A_0 \bar{B_1} + A_1\bar{B_0} + \bar{B_0} \bar{B_1}) = 1 \\
-      &A_0A_1A_2A_3 + A_0A_2A_3\bar{B_1} + A_1A_2A_3\bar{B_0} + A_2A_3\bar{B_0}\bar{B_1} = 1 \\
+      &A_2 A_3 (C_0(A_1 + \overline{B_1}) + A_1 \overline{B_1}) = 1 \\
+      &A_2 A_3 ((A_0 + \overline{B_0})(A_1 + \overline{B_1}) + A_1 \overline{B_1}) = 1 \\
+      &A_2 A_3 (A_0A_1 + A_0 \overline{B_1} + A_1\overline{B_0} + \overline{B_0} \overline{B_1}) = 1 \\
+      &A_0A_1A_2A_3 + A_0A_2A_3\overline{B_1} + A_1A_2A_3\overline{B_0} + A_2A_3\overline{B_0}\overline{B_1} = 1 \\
     \end{split}
   \end{equation*}
 
@@ -394,7 +394,7 @@
   エントロピーは$-\Sigma_{A \in \Omega} P(A) \log P(A)$と表せ、問題部により$\log 3 = 1.58, \log 5 = 2.32$だから求めるエントロピーは
   \begin{equation*}
     \begin{split}
-    -(2\frac{2}{25}\log \frac{2}{25} + 2 \frac{6}{25} \log \frac{6}{25} + \frac{9}{25} \log \frac{9}{25})
+    &-(2\frac{2}{25}\log \frac{2}{25} + 2 \frac{6}{25} \log \frac{6}{25} + \frac{9}{25} \log \frac{9}{25}) \\
     &= (\frac{4}{25}(\log 2 - 2 \log 5) + \frac{12}{25}(\log 2 + \log 3 - 2 \log 5) + \frac{9}{25}(2 \log 3 - 2 \log 5)) \\
     &= (\frac{16}{25} \log 2 + \frac{30}{25} \log 3 - 2 \log 5) \\
     &= -(0.64 + 1.896 - 4.64) = 2.104
@@ -406,7 +406,7 @@
   そして、最後に残ったノードからたどって、左端のノードに戻る際に通ったエッジから符号を決める。上部のエッジを1、下部のエッジを0とする。これを図にすると以下のようになる。
   \begin{figure}[H]
     \centering
-    \includegraphics[width=9cm]{images/huffman_tree.png}
+    \includegraphics[width=9cm]{images/huffman_tree2020.png}
   \end{figure}
   よって、2元符号$C_0$は以下のように表せる。
   \begin{center}
