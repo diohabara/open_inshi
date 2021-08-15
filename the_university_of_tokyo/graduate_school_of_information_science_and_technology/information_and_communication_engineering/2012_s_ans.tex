@@ -1,0 +1,187 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame={tb}
+}
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成23年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\section*{第2問\ 計算機アーキテクチャ}
+\subsection*{(1)} % https://en.wikipedia.org/wiki/Dependence_analysis
+依存は2つの命令で、あるレジスタxに対して、読み出し、書き込みがどの順番で行われているかによって定まる。
+\subsubsection*{フロー依存(Read after Write)}
+命令Aで書き込んだ値を後続の命令Bで読み出すことで起こるAからBへの依存関係。\\
+下の例では1行目で書き込んだレジスタxを2行目で読み出している。
+\begin{lstlisting}
+  x = 20
+  y = x + 12
+\end{lstlisting}
+
+\subsubsection*{逆依存(Write after Read)}
+命令Aで読みだしたレジスタに後続の命令Bが書き込みを行うことで起こるAからBの依存関係。\\
+下の例では1行目で読みだしたレジスタxに2行目で書き込みを加えている。
+\begin{lstlisting}
+  y = x + 20
+  x = 12
+\end{lstlisting}
+
+\subsubsection*{入力依存(Read after Read)}
+命令Aと命令Bで同じレジスタから読み出しを行うこと依存関係。 \\
+下の例では1行目と2行目ともにレジスタxの読み込みをしている。
+\begin{lstlisting}
+  y = x + 20
+  z = x + 12
+\end{lstlisting}
+
+\subsubsection*{出力依存(Write after Write)}
+命令Aで書き込んだレジスタに後続の命令Bが再度書き込みを行うことで起こるAからBの依存関係。\\
+下の例では1行目と2行目ともにレジスタxの書き込みをしている。
+\begin{lstlisting}
+  x = 20
+  x = 12
+\end{lstlisting}
+
+\subsection*{(2)}
+フロー依存、逆依存、出力依存
+
+\subsection*{(3)}
+それぞれ真、偽、偽
+
+\subsection*{(4)}
+与えられたアセンブリコードでは、L1、L3, L4でr1に書き込みをし、L2でr2に書き込みをしている。一方、L2、L3、L4でr1を読み込みし、L4でr2を読み込みしている。\\
+\subsubsection*{フロー依存(Read after Write)}
+フロー依存は命令Aで書き込みをしたレジスタを命令Bで読み込んでいるときに生じる。
+このことから組み合わせを考えると
+\[
+  (A, B) = (L1, L2), (L1, L3), (L1, L4), (L2, L3), (L2, L4), (L2, L4)
+\]
+
+\subsubsection*{逆依存(Write after Read)}
+フロー依存は命令Aで読み込みをしたレジスタを命令Bで書き込んでいるときに生じる。
+このことから組み合わせを考えると
+\[
+  (A, B) = (L2, L3), (L2, L4), (L3, L4)
+\]
+
+\subsection*{(5)}
+新しく変数を定義することで偽のデータ依存は解消できる。\\
+L3での書き込みレジスタr1とL4での読み込みレジスタr1を新しいレジスタr3とすることで、L2とL3を並列に動作させることが可能となる。
+
+\section*{第3問\ データベース}
+
+\section*{第4問\ 情報通信}
+
+\section*{第5問\ 信号処理}
+\subsection*{(1)}
+畳み込み積分のフーリエ変換はそれぞれの関数のフーリエ変換の積となるから
+\[
+  O(\omega) = G(\omega)H(\omega) + N(\omega)
+\]
+
+\subsection*{(2)}
+\begin{equation*}
+  \begin{split}
+    G(\omega)
+      &= \int^{\infty}_{-\infty} g(t) e^{-j \omega t} dt \\
+      &= \int^{\infty}_{-\infty} \left( \sum^{\infty}_{k = - \infty} \frac{1}{T} e^{j k \omega_0 t} \right)e^{-j \omega t} dt \\
+      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{-j(\omega -k\omega_0)t} dt \\
+      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{-j(\omega -k\omega_0)t} \cdot 1 dt \\
+      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} 2 \pi \delta(\omega - k \omega_0) \\
+      &= \omega \sum^{\infty}_{k = - \infty} \delta(\omega - k \omega_0)
+  \end{split}
+\end{equation*}
+
+ただし、4行目から5行目での変換には与えられたフーリエ変換表を用いている。
+以上より、インパルス列のフーリエ変換もインパルス列となる。
+
+\subsection*{(3)}
+(3)で、$n(t) = 0$より$N(\omega) = 0$とすると
+\begin{equation*}
+  \begin{split}
+    O(\omega) &= G(\omega) H(\omega) \\
+    |O(\omega)| &= |G(\omega) H(\omega)| \\
+    \log |O(\omega)| &= \log |G(\omega) H(\omega)| = \log |G(\omega)| + \log |H(\omega)| \\
+  \end{split}
+\end{equation*}
+
+\subsection*{(4)}
+(3)より
+
+\[
+  \log |H(\omega)| = \log |O(\omega)| - \log |G(\omega)| \\
+\]
+であり、$o(t)$から時刻$t_0$付近で$N$個の標本値を得るから、$g(t)$もインパルス列との畳み込みとして標本化される。\\
+すると、(2)より、インパルス列のフーリエ変換はインパルス列となるから、$\log | G(\omega) |$もインパルス列となる。以上から、$\log | H(\omega) |$は標本化各周波数は$\omega_0$として$\log |O(\omega)|$の下の包絡線を取れば良い。\\
+こうすると、$\log | O(\omega)$の成分を取り除いたフィルタの特性が現れる。
+
+\subsection*{(5)}
+$o(t) = s(t) + n(t)$より
+
+\[
+  O(\omega, t) = S(\omega, t) + N(\omega, t)
+\]
+
+となります。したがって、振幅の二乗を考えれば
+
+\begin{equation*}
+  \begin{split}
+    | O(\omega, t) |^2
+      &= O(\omega) \overline{O(\omega)} \\
+      &= (S(\omega, t) + N(\omega, t))\left(\overline{S(\omega, t)} + \overline{N(\omega, t)}\right) \\
+      &= |S(\omega, t)|^2 + S(\omega, t) \overline{N(\omega, t)} + \overline{S(\omega, t)}N(\omega, t) + |N(\omega, t)|^2 \\
+      &= |S(\omega, t)|^2 + 2Re(S(\omega, t) \overline{N(\omega, t)}) + |N(\omega, t)|^2 \\
+  \end{split}
+\end{equation*}
+
+よって、
+\begin{equation*}
+  \begin{split}
+    &\text{(5-1)} = |S(\omega, t)| \\
+    &\text{(5-2)} = Re(S(\omega, t) \overline{N(\omega, t)})\\
+    &\text{(5-3)} = |N(\omega, t)|
+  \end{split}
+\end{equation*}
+
+$Re(S(\omega, t) \overline{N(\omega, t)})$の項は$S(\omega, t)$と$N(\omega, t)$の内積にあたるので、ドクレイツ性より期待値は0に近づく。
+よって、
+\[
+  \text{(5-4)} = Re(S(\omega, t) \overline{N(\omega, t)})
+\]
+
+また、
+\[
+  \text{(5-5)} = |O(\omega, t)|^2 - |N(\omega, t)|^2
+\]
+
+\end{document}
+
