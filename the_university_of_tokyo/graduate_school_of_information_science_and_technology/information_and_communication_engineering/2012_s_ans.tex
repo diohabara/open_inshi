@@ -37,15 +37,65 @@
 \section*{第1問\ 電気･電子回路}
 
 \section*{第2問\ 計算機アーキテクチャ}
-\subsection*{(1)}
+\subsection*{(1)} % https://en.wikipedia.org/wiki/Dependence_analysis
+依存は2つの命令で、あるレジスタxに対して、読み出し、書き込みがどの順番で行われているかによって定まる。
+\subsubsection*{フロー依存(Read after Write)}
+命令Aで書き込んだ値を後続の命令Bで読み出すことで起こるAからBへの依存関係。\\
+下の例では1行目で書き込んだレジスタxを2行目で読み出している。
+\begin{lstlisting}
+  x = 20
+  y = x + 12
+\end{lstlisting}
+
+\subsubsection*{逆依存(Write after Read)}
+命令Aで読みだしたレジスタに後続の命令Bが書き込みを行うことで起こるAからBの依存関係。\\
+下の例では1行目で読みだしたレジスタxに2行目で書き込みを加えている。
+\begin{lstlisting}
+  y = x + 20
+  x = 12
+\end{lstlisting}
+
+\subsubsection*{入力依存(Read after Read)}
+命令Aと命令Bで同じレジスタから読み出しを行うこと依存関係。 \\
+下の例では1行目と2行目ともにレジスタxの読み込みをしている。
+\begin{lstlisting}
+  y = x + 20
+  z = x + 12
+\end{lstlisting}
+
+\subsubsection*{出力依存(Write after Write)}
+命令Aで書き込んだレジスタに後続の命令Bが再度書き込みを行うことで起こるAからBの依存関係。\\
+下の例では1行目と2行目ともにレジスタxの書き込みをしている。
+\begin{lstlisting}
+  x = 20
+  x = 12
+\end{lstlisting}
 
 \subsection*{(2)}
+フロー依存、逆依存、出力依存
 
 \subsection*{(3)}
+それぞれ真、偽、偽
 
 \subsection*{(4)}
+与えられたアセンブリコードでは、L1、L3, L4でr1に書き込みをし、L2でr2に書き込みをしている。一方、L2、L3、L4でr1を読み込みし、L4でr2を読み込みしている。\\
+\subsubsection*{フロー依存(Read after Write)}
+フロー依存は命令Aで書き込みをしたレジスタを命令Bで読み込んでいるときに生じる。
+このことから組み合わせを考えると
+\[
+  (A, B) = (L1, L2), (L1, L3), (L1, L4), (L2, L3), (L2, L4), (L2, L4)
+\]
+
+\subsubsection*{逆依存(Write after Read)}
+フロー依存は命令Aで読み込みをしたレジスタを命令Bで書き込んでいるときに生じる。
+このことから組み合わせを考えると
+\[
+  (A, B) = (L2, L3), (L2, L4), (L3, L4)
+\]
 
 \subsection*{(5)}
+新しく変数を定義することで偽のデータ依存は解消できる。\\
+L3での書き込みレジスタr1とL4での読み込みレジスタr1を新しいレジスタr3とすることで、L2とL3を並列に動作させることが可能となる。
 
 \section*{第3問\ データベース}
 
