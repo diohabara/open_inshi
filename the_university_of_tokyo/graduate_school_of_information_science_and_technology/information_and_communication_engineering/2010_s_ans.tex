@@ -38,14 +38,52 @@
 
 \section*{第2問\ 計算機アーキテクチャ}
 \subsection*{(1)}
+\subsubsection*{構造ハザード}
+同じハードウェア資源を複数の命令が利用しようとすることによる、資源不足によるハザード
+
+\subsubsection*{データハザード}
+前の命令の結果をあとの命令が利用するフロー依存が存在する場合に生じるハザード
+
+\subsubsection*{制御ハザード}
+分岐命令がある場合に、その結果が確定するまで次の命令が決定できないために起こるハザード
+
+\subsubsection*{ハザードと分岐予測の関係}
+分岐予測によって、制御ハザードを解決できる場合がある。
 
 \subsection*{(2)}
+求めるサイクル数は以下のように表せる。
+\[
+  \frac{n \text{[instruction]}}{i_0 \text{[instruction / cycle]}} = \frac{n}{i_0}\text{[cycle]}
+\]
 
 \subsection*{(3)}
+分岐予測ミスが0な、理想的なときに比べて、ペナルティ($\beta bnp$)サイクルだけ増加するので(2)より求めるサイクル数は
+\[
+  \frac{n}{i_0} + \beta b n p
+\]
 
 \subsection*{(4)}
+プログラムの総実行命令数は変わらない。分岐予測ペナルティによってサイクル数が(3)の増えたのだから求める
+
+\[
+  i(\beta) = \frac{n}{\frac{n}{i_0} + \beta bnp} = \frac{i_0}{1 + \beta b p i_0}
+\]
 
 \subsection*{(5)}
+数値を代入して
+\[
+  i(\beta) = \frac{2}{1 + 4 \beta}
+\]
+
+となる。グラフの外形は次の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2010_2.png}
+\end{figure}
+
+分岐予測ミスをへらす技術的努力と結果得られる性能向上に関して、このグラフから言えることは分岐予測ミスを減らす技術的努力をすればするほど、分岐予測ミス削減による性能向上率も上がる。\\
+グラフからは$\beta$が小さいほど、$\beta$を小さくしたときの$i(\beta)$の向上率が上がることが読み取れるからである。
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
