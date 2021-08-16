@@ -159,14 +159,61 @@ N個から2つのリストを選んで、(2)で定義した関数を適用して
 
 \section*{第5問\ 信号処理}
 \subsection*{(1)}
+片側z変換の定義は$X(z) = \sum^{\infty}_{n = 0} x(n)z^{-n}$なのでこれを適用する。また、$n-m \to l$の置き換えと、$x(n)=0(n<0)$を用いる。\\
+$x(n-m)$をz変換したものを$X'(z)$として
+\begin{equation*}
+  \begin{split}
+    X'(z)
+      &= \sum^{\infty}_{n=0} x(n-m) z^{-n} \\
+      &= \sum^{\infty}_{l=-m} x(l) z^{-l-m} \\
+      &= z^{-m} \sum^{\infty}_{l=-m} x(l) z^{-l} \\
+      &= z^{-m} X(z)
+  \end{split}
+\end{equation*}
 
 \subsection*{(2)}
+畳み込みの定義は以下の通り。
+\[
+  x_1(n) * x_2(n) = \sum^{\infty}_{k=0}x_1(n-k)x_2(k)
+\]
 
 \subsection*{(3)}
+$X_1(z)X_2(z)$の$z^{-n}$の係数に注目すると、この部分は$\sum^{n}_{k=0}x_1(n-k)x_2(k)$になっているので、(2)で答えた離散信号のZ変換になっていることがわかる。
 
 \subsection*{(4)}
+$\oplus$に入力される信号は$x(n) + ay(n-1)$であり、この$b$倍が$y(n)$となるので
+
+\[
+  y(n) = b\{x(n) + ay(n-1)\}
+\]
+
+また、Z変換を施すと$Y(z) = b\left\{ X(z) + a^{-1}Y(z)\right\} \to (1 - abz^{-1})Y(z) = bX(z)$となるので求める$H(z)$は
+
+\[
+  H(z) = \frac{b}{1 - abz^{-1}}
+\]
+
+となる。
 
 \subsection*{(5)}
+Z変換において
+
+\[
+  x(n) = a^{n} \cdot u(n) \to X(z) = \frac{1}{1 - az^{-1}}
+\]
+
+という式が成り立つ。ただし、$u(n)$はステップ関数。\\
+この公式で$a=ab$としたものに$b$をかけると$(4)$の結果となる。よって、$h(n)=a^{n}b^{n+1}$。\\
+
+よって、$y(n) = (x * h)(n)$の関係より
+
+\begin{equation*}
+  \begin{split}
+    y(n)
+      &= \sum^{n}_{k=0}x(n-k)h(k) \\
+      &= \sum^{n}_{k=0}x(n-k) a^{k}b^{k+1}
+  \end{split}
+\end{equation*}
 
 \end{document}
 
