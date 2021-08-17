@@ -62,14 +62,29 @@
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
+$x^2 + 7x + 3 = (x + 1)(x + 6) - 3$より
+\[
+  \text{quotient}(f, g) = x + 6,\quad \text{remainder}(f, g) = -3
+\]
 
 \subsection*{(2)}
+\begin{lstlisting}[mathescape]
+  $r - \text{LT}(r) - \text{LR}(g) \times g$
+\end{lstlisting}
 
 \subsection*{(3)}
+$r - \text{LT}(r) - \text{LR}(g) \times g$により$r$の次数は1以上小さくなる。よって、$\text{deg}(f) - \text{deg}(g)$回以内のwhile文内の処理により$\text{deg}(g) \leq \text{deg}(r)$となり、停止する。
 
 \subsection*{(4)}
+\subsubsection*{(b)}
+s
+
+\subsubsection*{(c)}
+rem
 
 \subsection*{(5)}
+$rem = \text{remainder}(h, s)$としたとき、$\text{deg}(rem) < \text{deg}(s)$より、$\text{deg}(g)$以内のwhile文内の処理により$\text{deg}(s) = 0$となり、この状態でもう一度while文内の処理を行うと、$\text{deg}(s) = 0 \to \text{remainder}(h, s) = 0$よりsが0になるのでwhile文を抜けて終了する。\\
+よって、$\text{remainder}$が呼ばれる回数の上限は$\text{deg}(g) + 1$回。
 
 \section*{第4問\ ネットワーク}
 
