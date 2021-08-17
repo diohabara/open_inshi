@@ -1,0 +1,195 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame={tb}
+}
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成21年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\section*{第2問\ 計算機アーキテクチャ}
+\subsection*{(1)}
+\subsubsection*{構造ハザード}
+同じハードウェア資源を複数の命令が利用しようとすることによる、資源不足によるハザード
+
+\subsubsection*{データハザード}
+前の命令の結果をあとの命令が利用するフロー依存が存在する場合に生じるハザード
+
+\subsubsection*{制御ハザード}
+分岐命令がある場合に、その結果が確定するまで次の命令が決定できないために起こるハザード
+
+\subsubsection*{ハザードと分岐予測の関係}
+分岐予測によって、制御ハザードを解決できる場合がある。
+
+\subsection*{(2)}
+求めるサイクル数は以下のように表せる。
+\[
+  \frac{n \text{[instruction]}}{i_0 \text{[instruction / cycle]}} = \frac{n}{i_0}\text{[cycle]}
+\]
+
+\subsection*{(3)}
+分岐予測ミスが0な、理想的なときに比べて、ペナルティ($\beta bnp$)サイクルだけ増加するので(2)より求めるサイクル数は
+\[
+  \frac{n}{i_0} + \beta b n p
+\]
+
+\subsection*{(4)}
+プログラムの総実行命令数は変わらない。分岐予測ペナルティによってサイクル数が(3)の増えたのだから求める
+
+\[
+  i(\beta) = \frac{n}{\frac{n}{i_0} + \beta bnp} = \frac{i_0}{1 + \beta b p i_0}
+\]
+
+\subsection*{(5)}
+数値を代入して
+\[
+  i(\beta) = \frac{2}{1 + 4 \beta}
+\]
+
+となる。グラフの外形は次の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2010_2.png}
+\end{figure}
+
+分岐予測ミスをへらす技術的努力と結果得られる性能向上に関して、このグラフから言えることは分岐予測ミスを減らす技術的努力をすればするほど、分岐予測ミス削減による性能向上率も上がる。\\
+グラフからは$\beta$が小さいほど、$\beta$を小さくしたときの$i(\beta)$の向上率が上がることが読み取れるからである。
+
+\section*{第3問\ アルゴリズムとデータ構造}
+\subsection*{(1)}
+repeat\_union()終了後の集合の状態は次の通り。
+
+\begin{center}
+  \usetikzlibrary {automata,positioning}
+  \begin{tikzpicture}[
+    ->,
+    >={Stealth[round]},
+    auto,
+    every state/.style={draw}
+  ]
+    \node[state] (five) {5};
+    \node[state] (four) [below right=of five] {4};
+    \node[state] (two) [below left=of five] {2};
+    \node[state] (three) [below left=of two] {3};
+    \node[state] (zero) [below left=of three] {0};
+    \node[state, right=5cm] (one) {1};
+
+    \path
+      (one)
+        edge [loop above] node {} (one)
+      (five)
+        edge [loop above] node {} (five)
+      (four)
+        edge node {} (five)
+      (two)
+        edge node {} (five)
+      (three)
+        edge node {} (two)
+      (zero)
+        edge node {} (three)
+      ;
+  \end{tikzpicture}
+\end{center}
+
+\subsection*{(2)}
+最悪時間計算量は$O(M \cdot \min(N, M))$となる。
+
+例えば、$y$は常に$0$を選び$x$は$1$から$\min(N, M)$まで選び、上限に達したら$\min(N, M)$を選び続けると最悪計算量を実現できる。
+
+\subsection*{(3)}
+\subsubsection*{方法}
+経路圧縮、つまりfindの際に辿ったノードがすべて根ノードにつながるようにすることで計算量を改善できる。\\
+親ノードを探す際に親ノードを根ノードに更新するようにする。以下のようにfind関数を変更すれば良い。
+
+\begin{lstlisting}[language=Python]
+def find(x: Node) -> Node:
+    if x != parents[x]:
+        parents[x] = find(parents[x])
+    return parents[x]
+\end{lstlisting}
+
+\subsubsection*{改善された計算量}
+改善された計算量は$(M \cdot \log(\min(N, M)))$となる。
+
+\subsection*{(4)}
+\subsubsection*{最小全域木の定義}
+無向グラフの全頂点を含む部分グラフである木(全域木)かつ含まれる辺の重みの総和が最小のものを最小全域木と言う。
+
+\subsubsection*{最小全域木を求めるアルゴリズム}
+いわゆるクラスカル法である。
+\begin{itemize}
+  \item 辺の集合から重みが最小のものを見つける
+  \item この辺がこれまでに取り出した辺と連結していなかったら使う。そうでなければ使わない
+  \item これを辺がなくなるまで繰り返す
+\end{itemize}
+
+この連結の有無でunion、findを使い判定する。
+
+\section*{第4問\ 情報通信}
+
+\section*{第5問\ ネットワーク}
+\subsection*{(1)}
+幅優先探索をすれば良い。
+\begin{itemize}
+  \item 最初に各ノードの最短経路を無限大と仮定する
+  \item ノードAの最短経路を0として、Aから出発して、隣のノードの最短経路は1である
+  \item そして、そのノードの隣の最短経路は$\min(\text{そのノードまでの最短経路} + 1, \text{隣のノードの最短経路})$である
+  \item これをすべてのノードの最短経路が出るまで繰り返す
+\end{itemize}
+
+\subsection*{(2)}
+ダイクストラ法を使う。
+\begin{itemize}
+  \item 各ノードまでの距離を無限大と仮定する
+  \item 始点の距離を0とおく
+  \item 未確定ノードの中から、最もコストが小さいノードを選び、そのコストを最小コストとして確定する
+  \item 今確定したノードから｢直接つながっている｣かつ｢未確定である｣ノードに対して、今確定したノードを経由した場合のコストを計算する。今までのコストよりも小さければ最小コストを更新する
+  \item すべてのノードの最小コストが確定するまで繰り返す。
+\end{itemize}
+
+\subsection*{(3)}
+異なるネットワークにパケットを送信するときに最適な配送経路を決定するルーティングで使われている。
+
+\section*{第6問\ 信号処理}
+\subsection*{(1)}
+
+\subsection*{(2)}
+
+\subsection*{(3)}
+
+\subsection*{(4)}
+
+\subsection*{(5)}
+
+\end{document}
+
