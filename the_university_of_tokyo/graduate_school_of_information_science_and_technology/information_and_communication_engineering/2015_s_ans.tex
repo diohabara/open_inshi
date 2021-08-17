@@ -1,0 +1,201 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+%% graphs
+\usepackage{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+\usepackage{askmaps} % Karnaugh map
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame={tb}
+}
+\usetikzlibrary{automata, positioning}
+\tikzset{
+  ->,
+  >={Stealth[round]},
+  auto,
+  every state/.style={draw}
+}
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成26年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\section*{第2問\ 計算機アーキテクチャ}
+\subsection*{(1)}
+\subsubsection*{(a) キャッシュ}
+1クロックでデータの読み書きができる高速小容量なメモリとしてキャッシュはある。利用頻度の高いアドレスに対して高速にプログラムがアクセスできる。
+
+\subsubsection*{(b) ハードウェアによる先読み}
+% ref: https://www.fujitsu.com/jp/products/computing/servers/unix/term/hardwareprefetch/
+(プリフェッチとも言う。)\\
+CPUが今後のデータアクセスを予測して自動的にメインメモリからキャッシュにデータをおく。メインメモリよりも高速にアクセスできるキャッシュからデータを利用できる。
+
+\subsubsection*{(c) ノンブロッキングキャッシュ}
+% ref: https://www.fujitsu.com/jp/products/computing/servers/unix/term/nonblockingcache/
+ある処理に必要なデータをメインメモリにまで取りに行く間に、他の処理に必要なデータをキャッシュから取る仕組み。これにより、処理全体でデータを取りに行く時間が短縮できる。
+
+\subsection*{(2)}
+\subsubsection*{(2-1)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (b)
+  \item{根拠}
+  \\
+  方法1で使うデータが周期的であり先読みが非常に効果的だから。一方、ランダムに添え字が選ばれる方法2に対して有効ではないから。
+\end{itemize}
+
+\subsubsection*{(2-2)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (a)
+  \item{根拠}
+  \\
+  $N \approx 2^{10}$のとき、構造体は$16 = 2^4$バイトだから全て合わせて約$2^{14}$バイト。L1キャッシュは$32\text{KB} \approx 2^5 \times 2^{10} = 2^{15}\text{バイト}$だからすべてL1の構造体はL1キャッシュに載る。一方、$N \approx 2^{22}$のときはL1キャッシュにすべての構造体が載らないから。
+\end{itemize}
+
+\subsubsection*{(2-3)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (b)
+  \item{根拠}
+  \\
+  (2-1)と同様の理由。
+\end{itemize}
+
+\subsubsection*{(2-4)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  なし
+  \item{根拠}
+  \\
+  配列にアクセスする時間計算量は$O(1)$だが、線形リストにアクセスする場合は$O(N)$だから差がついている。どちらも要素がキャッシュに載らないほど大きいのでプロセッサレベルの問題ではない。
+\end{itemize}
+
+\subsection*{(3)}
+\subsubsection*{最もありそうな値}
+(b)
+\subsubsection*{根拠}
+キャッシュにはすべての要素が載らないが、規則的に要素にアクセスするのでハードウェアの先読みから方法4よりは高速にアクセスできる。一方同じ規則的なアクセスである方法1は配列の添字でアクセスしているのに対して、方法3はより低速な線形リストでアクセスしている。そのため方法1ほど早くはなく(b)と考えられる。
+
+\section*{第3問\ アルゴリズムとデータ構造}
+\subsection*{(1)}
+$x^2 + 7x + 3 = (x + 1)(x + 6) - 3$より
+\[
+  \text{quotient}(f, g) = x + 6,\quad \text{remainder}(f, g) = -3
+\]
+
+\subsection*{(2)}
+\begin{lstlisting}[mathescape]
+  $r - \text{LT}(r) - \text{LR}(g) \times g$
+\end{lstlisting}
+
+\subsection*{(3)}
+$r - \text{LT}(r) - \text{LR}(g) \times g$により$r$の次数は1以上小さくなる。よって、$\text{deg}(f) - \text{deg}(g)$回以内のwhile文内の処理により$\text{deg}(g) \leq \text{deg}(r)$となり、停止する。
+
+\subsection*{(4)}
+\subsubsection*{(b)}
+s
+
+\subsubsection*{(c)}
+rem
+
+\subsection*{(5)}
+$rem = \text{remainder}(h, s)$としたとき、$\text{deg}(rem) < \text{deg}(s)$より、$\text{deg}(g)$以内のwhile文内の処理により$\text{deg}(s) = 0$となり、この状態でもう一度while文内の処理を行うと、$\text{deg}(s) = 0 \to \text{remainder}(h, s) = 0$よりsが0になるのでwhile文を抜けて終了する。\\
+よって、$\text{remainder}$が呼ばれる回数の上限は$\text{deg}(g) + 1$回。
+
+\section*{第4問\ ネットワーク}
+
+\section*{第5問\ 情報理論}
+\subsection*{(1)}
+状態遷移図より以下の方程式が成り立つ。
+
+\begin{equation*}
+  \begin{split}
+    &\omega_0 = 0.9 \omega_0 + 0.2 \omega_1 \\
+    &\omega_1 = 0.1 \omega_0 + 0.8 \omega_1 \\
+    &\omega_0 + \omega_1 = 1
+  \end{split}
+\end{equation*}
+
+これを解いて、
+\[
+  (\omega_0, \omega_1) = (\frac{2}{3}, \frac{1}{3})
+\]
+
+\subsection*{(2)}
+(1)より求める確率は
+\[
+  0.1 \omega_0 + 0.8 \omega_1 = \frac{1}{3}
+\]
+
+\subsection*{(3)}
+長さ$k$のランの場合、最初の01を固定してその後$l-1$個のランが連続して現れ、その後0が出る確率を考えればよい。\\
+この確率は$0.8^{k-1} \cdot 0.2$。よって、求める確率はそれぞれ0.2、0.16、$0.2 \cdot 0.8^{k-1}$である。
+
+\subsection*{(4)}
+求める平均長を$x$とすると
+\begin{equation*}
+  \begin{split}
+    x &= 0.2 \sum^{\infty}_{k=1}k \cdot 0.8^{k-1}\\
+    0.8x &= 0.2 \sum^{\infty}_{k=1}k \cdot 0.8^{k} \\
+      &= 0.2 \sum^{\infty}_{l=2}(l-1) \cdot 0.8^{l-1}
+  \end{split}
+\end{equation*}
+
+両辺の差を取って
+
+\begin{equation*}
+  \begin{split}
+    0.2x &= 0.2 + 0.2 \sum^{\infty}_{k=2} 0.8^{k-1}\\
+      &= 0.2 \sum^{\infty}_{k=1} 0.8^{k} = \frac{0.2}{1 - 0.8} = 1
+  \end{split}
+\end{equation*}
+
+よって、$x=5$となる。
+
+\subsection*{(5)}
+求めるエントロピーは
+\begin{equation*}
+  \begin{split}
+    &\frac{2}{3}\left(-\frac{9}{10} \log (\frac{9}{10}) - \frac{1}{10} \log (\frac{1}{10})\right) + \frac{1}{3}\left(-\frac{8}{10} \log (\frac{8}{10}) - \frac{2}{10} \log (\frac{2}{10})\right) \\
+      &= \frac{2}{3}(\log 10 - \frac{9}{5} \log 3) + \frac{1}{3}(\log 10 - \frac{13}{5})\\
+      &= \log 10 - 1.2 \cdot 1.58 - \frac{13}{15} \\
+      &= 1 + 2.32 - 1.896 - 0.867 = 3.32 - 2.763 \\
+      &= 0.557
+  \end{split}
+\end{equation*}
+
+\subsection*{(6)}
+確率$\frac{1}{3}$で1が発生する際のエントロピーは$- \frac{1}{3} \log (\frac{1}{3}) - \frac{2}{3} \log (\frac{2}{3}) = \log 3 - \frac{2}{3} = 0.913 \text{[bit]}$となり、(5)よりも大きくなる。\\
+これは(5)の場合は以前の結果をもとにしており、結果をある程度予測できるため。
+
+\end{document}
+
