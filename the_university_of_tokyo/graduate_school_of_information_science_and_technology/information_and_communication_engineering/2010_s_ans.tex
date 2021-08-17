@@ -132,10 +132,10 @@ repeat\_union()終了後の集合の状態は次の通り。
 親ノードを探す際に親ノードを根ノードに更新するようにする。以下のようにfind関数を変更すれば良い。
 
 \begin{lstlisting}[language=Python]
-  def find(x: Node) -> Node:
-      if x != parents[x]:
-          parents[x] = find(parents[x])
-      return parents[x]
+def find(x: Node) -> Node:
+    if x != parents[x]:
+        parents[x] = find(parents[x])
+    return parents[x]
 \end{lstlisting}
 
 \subsubsection*{改善された計算量}
