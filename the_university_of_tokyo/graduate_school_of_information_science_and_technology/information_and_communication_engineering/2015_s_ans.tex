@@ -75,16 +75,67 @@
 
 \section*{第5問\ 情報理論}
 \subsection*{(1)}
+状態遷移図より以下の方程式が成り立つ。
+
+\begin{equation*}
+  \begin{split}
+    &\omega_0 = 0.9 \omega_0 + 0.2 \omega_1 \\
+    &\omega_1 = 0.1 \omega_0 + 0.8 \omega_1 \\
+    &\omega_0 + \omega_1 = 1
+  \end{split}
+\end{equation*}
+
+これを解いて、
+\[
+  (\omega_0, \omega_1) = (\frac{2}{3}, \frac{1}{3})
+\]
 
 \subsection*{(2)}
+(1)より求める確率は
+\[
+  0.1 \omega_0 + 0.8 \omega_1 = \frac{1}{3}
+\]
 
 \subsection*{(3)}
+長さ$k$のランの場合、最初の01を固定してその後$l-1$個のランが連続して現れ、その後0が出る確率を考えればよい。\\
+この確率は$0.8^{k-1} \cdot 0.2$。よって、求める確率はそれぞれ0.2、0.16、$0.2 \cdot 0.8^{k-1}$である。
 
 \subsection*{(4)}
+求める平均長を$x$とすると
+\begin{equation*}
+  \begin{split}
+    x &= 0.2 \sum^{\infty}_{k=1}k \cdot 0.8^{k-1}\\
+    0.8x &= 0.2 \sum^{\infty}_{k=1}k \cdot 0.8^{k} \\
+      &= 0.2 \sum^{\infty}_{l=2}(l-1) \cdot 0.8^{l-1}
+  \end{split}
+\end{equation*}
+
+両辺の差を取って
+
+\begin{equation*}
+  \begin{split}
+    0.2x &= 0.2 + 0.2 \sum^{\infty}_{k=2} 0.8^{k-1}\\
+      &= 0.2 \sum^{\infty}_{k=1} 0.8^{k} = \frac{0.2}{1 - 0.8} = 1
+  \end{split}
+\end{equation*}
+
+よって、$x=5$となる。
 
 \subsection*{(5)}
+求めるエントロピーは
+\begin{equation*}
+  \begin{split}
+    &\frac{2}{3}\left(-\frac{9}{10} \log (\frac{9}{10}) - \frac{1}{10} \log (\frac{1}{10})\right) + \frac{1}{3}\left(-\frac{8}{10} \log (\frac{8}{10}) - \frac{2}{10} \log (\frac{2}{10})\right) \\
+      &= \frac{2}{3}(\log 10 - \frac{9}{5} \log 3) + frac{1}{3}(\log 10 - \frac{13}{5})\\
+      &= \log 10 - 1.2 \cdot 1.58 - \frac{13}{15} \\
+      &= 1 + 2.32 - 1.896 - 0.867 = 3.32 - 2.763 \\
+      &= 0.557
+  \end{split}
+\end{equation*}
 
-\subsection*{(5)}
+\subsection*{(6)}
+確率$\frac{1}{3}$で1が発生する際のエントロピーは$- \frac{1}{3} \log (\frac{1}{3}) - \frac{2}{3} \log (\frac{2}{3}) = \log 3 - \frac{2}{3} = 0.913 \text{[bit]}$となり、(5)よりも大きくなる。\\
+これは(5)の場合は以前の結果をもとにしており、結果をある程度予測できるため。
 
 \end{document}
 
