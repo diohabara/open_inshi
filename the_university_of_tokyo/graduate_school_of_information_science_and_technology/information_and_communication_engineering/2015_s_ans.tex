@@ -46,19 +46,64 @@
 
 \section*{第2問\ 計算機アーキテクチャ}
 \subsection*{(1)}
-\subsubsection*{(a)}
+\subsubsection*{(a) キャッシュ}
+1クロックでデータの読み書きができる高速小容量なメモリとしてキャッシュはある。利用頻度の高いアドレスに対して高速にプログラムがアクセスできる。
 
-\subsubsection*{(b)}
+\subsubsection*{(b) ハードウェアによる先読み}
+% ref: https://www.fujitsu.com/jp/products/computing/servers/unix/term/hardwareprefetch/
+(プリフェッチとも言う。)\\
+CPUが今後のデータアクセスを予測して自動的にメインメモリからキャッシュにデータをおく。メインメモリよりも高速にアクセスできるキャッシュからデータを利用できる。
 
-\subsubsection*{(c)}
+\subsubsection*{(c) ノンブロッキングキャッシュ}
+% ref: https://www.fujitsu.com/jp/products/computing/servers/unix/term/nonblockingcache/
+ある処理に必要なデータをメインメモリにまで取りに行く間に、他の処理に必要なデータをキャッシュから取る仕組み。これにより、処理全体でデータを取りに行く時間が短縮できる。
 
 \subsection*{(2)}
-\subsubsection*{最も関係の深いプロセッサ機構}
-\subsubsection*{根拠}
+\subsubsection*{(2-1)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (b)
+  \item{根拠}
+  \\
+  方法1で使うデータが周期的であり先読みが非常に効果的だから。一方、ランダムに添え字が選ばれる方法2に対して有効ではないから。
+\end{itemize}
+
+\subsubsection*{(2-2)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (a)
+  \item{根拠}
+  \\
+  $N \approx 2^{10}$のとき、構造体は$16 = 2^4$バイトだから全て合わせて約$2^{14}$バイト。L1キャッシュは$32\text{KB} \approx 2^5 \times 2^{10} = 2^{15}\text{バイト}$だからすべてL1の構造体はL1キャッシュに載る。一方、$N \approx 2^{22}$のときはL1キャッシュにすべての構造体が載らないから。
+\end{itemize}
+
+\subsubsection*{(2-3)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  (b)
+  \item{根拠}
+  \\
+  (2-1)と同様の理由。
+\end{itemize}
+
+\subsubsection*{(2-4)}
+\begin{itemize}
+  \item{最も関係の深いプロセッサ機構}
+  \\
+  なし
+  \item{根拠}
+  \\
+  配列にアクセスする時間計算量は$O(1)$だが、線形リストにアクセスする場合は$O(N)$だから差がついている。どちらも要素がキャッシュに載らないほど大きいのでプロセッサレベルの問題ではない。
+\end{itemize}
 
 \subsection*{(3)}
 \subsubsection*{最もありそうな値}
+(b)
 \subsubsection*{根拠}
+キャッシュにはすべての要素が載らないが、規則的に要素にアクセスするのでハードウェアの先読みから方法4よりは高速にアクセスできる。一方同じ規則的なアクセスである方法1は配列の添字でアクセスしているのに対して、方法3はより低速な線形リストでアクセスしている。そのため方法1ほど早くはなく(b)と考えられる。
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
