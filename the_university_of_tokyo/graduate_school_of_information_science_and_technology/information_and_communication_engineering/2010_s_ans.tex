@@ -87,12 +87,73 @@
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
+repeat\_union()終了後の集合の状態は次の通り。
+
+\begin{center}
+  \usetikzlibrary {automata,positioning}
+  \begin{tikzpicture}[
+    ->,
+    >={Stealth[round]},
+    auto,
+    every state/.style={draw}
+  ]
+    \node[state] (five) {5};
+    \node[state] (four) [below right=of five] {4};
+    \node[state] (two) [below left=of five] {2};
+    \node[state] (three) [below left=of two] {3};
+    \node[state] (zero) [below left=of three] {0};
+    \node[state, right=5cm] (one) {1};
+
+    \path
+      (one)
+        edge [loop above] node {} (one)
+      (five)
+        edge [loop above] node {} (five)
+      (four)
+        edge node {} (five)
+      (two)
+        edge node {} (five)
+      (three)
+        edge node {} (two)
+      (zero)
+        edge node {} (three)
+      ;
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(2)}
+最悪時間計算量は$O(M \cdot \min(N, M))$となる。
+
+例えば、$y$は常に$0$を選び$x$は$1$から$\min(N, M)$まで選び、上限に達したら$\min(N, M)$を選び続けると最悪計算量を実現できる。
 
 \subsection*{(3)}
+\subsubsection*{方法}
+経路圧縮、つまりfindの際に辿ったノードがすべて根ノードにつながるようにすることで計算量を改善できる。\\
+親ノードを探す際に親ノードを根ノードに更新するようにする。以下のようにfind関数を変更すれば良い。
+
+\begin{lstlisting}[language=Python]
+  def find(x: Node) -> Node:
+      if x != parents[x]:
+          parents[x] = find(parents[x])
+      return parents[x]
+\end{lstlisting}
+
+\subsubsection*{改善された計算量}
+改善された計算量は$(M \cdot \log(\min(N, M)))$となる。
 
 \subsection*{(4)}
+\subsubsection*{最小全域木の定義}
+無向グラフの全頂点を含む部分グラフである木(全域木)かつ含まれる辺の重みの総和が最小のものを最小全域木と言う。
+
+\subsubsection*{最小全域木を求めるアルゴリズム}
+いわゆるクラスカル法である。
+\begin{itemize}
+  \item 辺の集合から重みが最小のものを見つける
+  \item この辺がこれまでに取り出した辺と連結していなかったら使う。そうでなければ使わない
+  \item これを辺がなくなるまで繰り返す
+\end{itemize}
+
+この連結の有無でunion、findを使い判定する。
 
 \section*{第4問\ 情報通信}
 
