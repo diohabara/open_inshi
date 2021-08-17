@@ -14,6 +14,7 @@
 \usepackage{siunitx} % SI units
 \usepackage{tikz} % graphic elements
 \usepackage{wrapfig} % must be after float package.
+\usepackage{askmaps} % Karnaugh map
 %% type system
 \usepackage{bussproofs} % proof tree
 %% code
@@ -24,6 +25,13 @@
   basicstyle=\footnotesize,
   numbers=left,
   frame={tb}
+}
+\usetikzlibrary{automata, positioning}
+\tikzset{
+  ->,
+  >={Stealth[round]},
+  auto,
+  every state/.style={draw}
 }
 
 % Basic information
@@ -38,14 +46,107 @@
 
 \section*{第2問\ 論理回路}
 \subsection*{(1)}
+下の図のような状態遷移図になる。
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[state] (A) {A};
+    \node(left-A) [left=of A] {start};
+    \draw[->, thick] (left-A) -- (A);
+    \node[state] (B) [below left=2cm and 3cm of A] {B};
+    \node[state] (C) [below right=2cm and 3cm of A] {C};
+    \node[state] (D) [below left=of B] {D};
+    \node[state] (E) [below right=of B] {E};
+    \node[state] (F) [below left=of C] {F};
+    \node[state] (G) [below right=of C] {G};
+
+    \path
+    (A)
+      edge [bend right] node {0/0} (B)
+      edge node {1/0} (C)
+    (B)
+      edge node {0/0} (D)
+      edge node {1/0} (E)
+    (C)
+      edge node {0/0} (F)
+      edge node {1/0} (G)
+    (D)
+      edge [bend left] node {0/0, 1/1} (A)
+    (E)
+      edge node {0/1, 1/1} (A)
+    (F)
+      edge node {0/1, 1/1} (A)
+    (G)
+      edge [bend right, looseness=3] node {0/1, 1/1} (A)
+    ;
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(2)}
+同じ入力に対して同じ出力を返し、かつ同じ状態に遷移するようなノードをまとめると求める状態遷移図は以下の通り。
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[state] (A) {A};
+    \node(left-A) [left=of A] {start};
+    \draw[->, thick] (left-A) -- (A);
+    \node[state] (B) [below left=of A] {B};
+    \node[state] (C) [below right=of A] {C};
+    \node[state] (D) [below left=of B] {D};
+    \node[state] (E) [below right=of C] {E};
+
+    \path
+    (A)
+      edge node {0/0} (B)
+      edge node {1/0} (C)
+    (B)
+      edge node {0/0} (D)
+      edge [bend right] node {1/0} (E)
+    (C)
+      edge node {0/0, 0/1} (E)
+    (D)
+      edge [bend left] node {0/0, 1/1} (A)
+    (E)
+      edge [bend right, looseness=3] node {0/1, 1/1} (A)
+    ;
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(3)}
+状態遷移表は次の通り。ただし*は0でも1でも良いことを示す。
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  S & I & nextS & O \\ \hline \hline
+  A & 0 & B     & 0 \\ \hline
+  A & 1 & C     & 0 \\ \hline
+  B & 0 & D     & 0 \\ \hline
+  B & 1 & E     & 0 \\ \hline
+  C & * & E     & 0 \\ \hline
+  D & 0 & A     & 0 \\ \hline
+  D & 1 & A     & 1 \\ \hline
+  E & * & A     & 1 \\ \hline
+  \end{tabular}
+\end{table}
 
 \subsection*{(4)}
+入力を順にX,Y,Zとしてカルノー図は次の通り。
+\begin{figure}[htbp]
+  \centering
+  \askmapiii{出力1}{{X}{Y}{Z}}{}{12345678}
+  {
+    \put(3.5, 1.0){\oval(1.8,1.8)[r]}%
+    \put(3.5, 0.1){\line(-2, 0){3}}%
+    \put(3.5, 1.9){\line(-2, 0){2}}%
+    \put(0.5, 0.6){\oval(1.0, 1.0)[l]}%
+    \put(1.4, 1.1){\oval(1.8, 1.7)[lt]}%
+  }
+  \caption{カルノー図}
+\end{figure}
 
 \subsection*{(5)}
+TODO
 
 \section*{第3問\ データベース}
 
