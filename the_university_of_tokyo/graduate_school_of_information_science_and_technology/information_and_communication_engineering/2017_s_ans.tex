@@ -131,13 +131,71 @@ while 0 < counter:
 
 \section*{第5問\ 情報理論}
 \subsection*{(1)}
+出力のデータを表にすると以下の通り。
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|l|}
+  \hline
+  1 & 2 & 3 & 4 & 5 & 合計 \\ \hline
+  1 & 3 & 5 & 5 & 2 & 16 \\ \hline
+  \end{tabular}
+\end{table}
+
+よって、ランダム系列とみなしたときのエントロピーは
+\begin{equation*}
+  \begin{split}
+    H
+      &= - (\frac{1}{16} \log (\frac{1}{16}) + 2 \cdot \frac{3}{16}\log (\frac{3}{16}) + 2 \cdot \frac{5}{16} \log (\frac{5}{16}))\\
+      &= \log 16 - \frac{1}{16} (3 \log 3 + 10 \log 5 + 2 \log 2) \\
+      &= 4 - \frac{1}{16}(3 \cdot 1.6 + 10 \cdot 2.3 + 2) = 2.1375 \approx 2.14 \text{[bit]}
+  \end{split}
+\end{equation*}
 
 \subsection*{(2)}
+ハフマン符号化する。以下の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2017_huffman_tree.png}
+\end{figure}
+
+このとき、平均符号長は以下のように2.2bitより小さくなる。
+\[
+  2 \cdot 3 \cdot \frac{5}{16} + 3 \cdot \left(\frac{2}{16} + \frac{1}{16}\right)= \frac{35}{16} = 2.1875 (< 2.2) \text{[bit]}
+\]
 
 \subsection*{(3)}
+条件として$\alpha, \beta \in \mathbb{Z}$かつ$\alpha + \beta = 1$かつ$b_n$のエントロピーが1.0。
+$\alpha + \beta = 1$の条件を使うため、$a_{n-1} = a_{n-2}$のパターンについて見ていく。
+
+\begin{itemize}
+  \item $n = 5$のとき、$a_n = 3, a_{n-1} = a_{n-2} = 4$となることから$b_n = -1$
+  \item $n = 7$のとき、$a_n = 4, a_{n-1} = a_{n-2} = 3$となることから$b_n = 1$
+\end{itemize}
+
+これより、$b_n = \pm 1$となることが必要条件。\\
+
+次に$(\alpha, \beta)$の組に注目する。\\
+
+\begin{itemize}
+  \item $n = 2$のとき、$(a_n, a_{n-1}, a_{n_2}) = (3, 5, 2)$となるが、$\alpha \leq 1$のとき、$a_2 \leq 4$となり不適当
+  \item $n = 3$のとき、$(a_n, a_{n-1}, a_{n_2}) = (4, 3, 5)$となるが、$\beta \leq 2$のとき、$a_3 \leq 6$となり不適当
+\end{itemize}
+
+したがって、$(\alpha, \beta) = (0, 1)$が候補に残る。\\
+
+最後に表よりすべての$n \leq 2$に対して$a_{n} = a_{n-2} \pm 1$が成り立っているので、求める出現確率は$(\alpha, \beta) = (0, 1)$
 
 \subsection*{(4)}
+$a_0, a_1$で必要な符号長は$5 \text{[bit]}$。それ以降は$b_n$の情報だけで十分なので、$b_n$が$1$なのか$-1$なのかの情報を$1 \text{[bit]}$ずつ送れば伝達は可能。\\
+したがって、求める符号長は$5 + 14 = 19\text{[bit]}$。
 
 \subsection*{(5)}
+\begin{enumerate}
+  \item $X_1, \dots, X_n$が互いに独立でない場合、$n$個を合わせたときに得られる情報量は単純な足し合わせにはならない。したがって、$X_1, \dots, X_n$の中に相関がある場合。情報量が減ってしまうから。
+  \item $X_1, \dots, X_n$を受け取って$Y$から出力する際に、情報が抜け落ちてしまう場合。情報量が落ちてしまうから。
+  \item ビット誤りや$Y$の内部状態によって出力が変化する場合。$X_1, \dots, X_n$とは関係のない情報を添加していることになるので情報量が増える要因となるから。
+\end{enumerate}
 
 \end{document}
