@@ -7,6 +7,7 @@
 \usepackage{bm} % bold character
 \usepackage{latexsym} % more mathematical notations
 \usepackage{physics} % physical notations
+\usepackage{mathtools} % math tools
 %% graphs
 \usepackage{graphicx, xcolor} % graph
 \usepackage{circuitikz} % for circuit elements
@@ -57,12 +58,74 @@
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
+求めるリストLの値の推移は以下の通り。
+\begin{table}[]
+  \begin{tabular}{|l|l|l|}
+  \hline
+  \textit{i} & A[i] & L            \\ \hline \hline
+  0          & 11   & {11}         \\ \hline
+  1          & 10   & {}           \\ \hline
+  2          & 11   & {11}         \\ \hline
+  3          & 11   & {11, 11}     \\ \hline
+  4          & 7    & {11}         \\ \hline
+  5          & 11   & {11, 11}     \\ \hline
+  6          & 11   & {11, 11, 11} \\ \hline
+  7          & 3    & {11, 11}     \\ \hline
+  8          & 8    & {11}         \\ \hline
+  \end{tabular}
+\end{table}
 
 \subsection*{(2)}
+$i$番目の要素を処理した後のLの要素の種類数は0または1である。\\
+$i+1$番目の要素を処理した後も種類数が0または1であるから帰納法よりLに含まれる要素の種類数は高々1つである。
 
 \subsection*{(3)}
+Lに含まれる要素が高々1つであることは(2)で示した。よって、全ての要素を処理した後のLに$u_{MAJORITY}$が含まれることを証明すれば良い。\\
+\begin{proof}[証明]
+  \[
+    \text{count} \coloneqq \text{(Lに含まれている$u_{MAJORITY}$の個数)} - \text{(Lに含まれている$u_{MAJORITY}$以外の要素の個数)}
+  \]
+  として、処理が終わったときに$0 < count$であることを示す。はじめ、Lは空であるので$count = 0$。A[i]に対して処理を行うとき\\
+  \subsubsection*{(i) $A[i] = u_{MAJORITY}$の場合}
+  \begin{itemize}
+    \item Lに$u_{MAJORITY}$を追加する
+    \item Lから$u_{MAJORITY}$以外の要素を1つ取り除く
+  \end{itemize}
+  のどちらかである。よってcountは1大きくなる
+  \subsubsection*{(ii)$A[i] \neq u_{MAJORITY}$の場合}
+  \begin{itemize}
+    \item LにA[i]を追加する
+    \item Lから$u_{MAJORITY}$を1つ取り除く
+    \item Lから$u_{MAJORITY}$以外の要素を1つ取り除く
+  \end{itemize}
+  のいずれかである。
+  (i)(ii)からすべての処理が終わったとき
+  \[
+    \text{(Aに含まれている$u_{MAJORITY}$の個数)} - \text{(Aに含まれている$u_{MAJORITY}$以外の要素の個数)} \leq count
+  \]
+  であるので、$u_{MAJORITY}$が過半数であることから$0 < count$となる。したがって、過半数を占めるユーザ$u_{MAJORITY}$が存在するとき$u_{MAJORITY}$はLに含まれる唯一のユーザである。
+\end{proof}
 
 \subsection*{(4)}
+\begin{lstlisting}[language=Python]
+u = -1 # Lに含まれるユーザ
+counter = 0 # Lに含まれるユーザ数
+while True:
+    v = read_log()
+    if v == -1:
+        break
+    if counter == 0:
+        u = v
+        counter = 1
+    else:
+        if v == u:
+            counter += 1
+        else:
+            counter -= 1
+while 0 < counter:
+    print(u)
+    counter -= 1
+\end{lstlisting}
 
 \section*{第4問\ 情報通信}
 
