@@ -27,13 +27,19 @@
   numbers=left,
   frame={tb}
 }
-\usetikzlibrary{automata, positioning}
+\usetikzlibrary{automata, positioning, calc, quotes}
 \tikzset{
   ->,
   >={Stealth[round]},
   auto,
-  every state/.style={draw}
+  every state/.style={draw},
+  node distance=3cm
 }
+\newcommand\DoubleLine[5][4pt]{%
+    \path(#2)--(#3)coordinate[at start](h1)coordinate[at end](h2);
+    \draw[<-,very thick,black] ($(h1)!#1!90:(h2)$)  to ["#4"]   ($(h2)!#1!-90:(h1)$);
+    \draw[->,very thick,  red] ($(h1)!#1!-90:(h2)$) to ["#5" '] ($(h2)!#1!90:(h1)$);
+    }
 
 % Basic information
 \title{電子情報学専攻 \, 専門 \\ 平成29年 \, 解答･解説}
@@ -47,12 +53,84 @@
 
 \section*{第2問\ 論理回路}
 \subsection*{(1)}
+求める最も状態数の少ない状態遷移図は次の通り。
+\begin{center}
+  \begin{tikzpicture}
+    \node[state] (ul) {$S_0$};
+    \node[state] (ur) [right =of ul]{$S_1$};
+    \node[state] (lr) [below =of ur]{$S_2$};
+    \node[state] (ll) [below =of ul]{$S_3$};
+
+    \DoubleLine{ul}{ur}{3/0}{1/1}
+    \DoubleLine{ul}{lr}{2/0}{2/3}
+    \DoubleLine{ul}{ll}{1/0}{3/3}
+    \DoubleLine{ur}{lr}{3/1}{1/2}
+    \DoubleLine{ur}{ll}{2/1}{2/3}
+    \DoubleLine{ll}{lr}{1/3}{3/2}
+
+    \path
+      (ul)
+        edge [loop above] node {0/0} (ul)
+      (ur)
+        edge [loop above] node {0/1} (ur)
+      (lr)
+        edge [loop below] node {0/2} (lr)
+      (ll)
+        edge [loop below] node {0/3} (ll)
+    ;
+  \end{tikzpicture}
+\end{center}
 
 \subsection*{(2)}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l||l|l|}
+  \hline
+  $I_1$ & $I_0$ & $S_1$ & $S_0$ & $S_1'$ & $S_0'$ \\ \hline \hline
+  0     & 0     & 0     & 0     & 0      & 0      \\ \hline
+  0     & 0     & 0     & 1     & 0      & 1      \\ \hline
+  0     & 0     & 1     & 1     & 1      & 1      \\ \hline
+  0     & 0     & 1     & 0     & 1      & 0      \\ \hline
+  0     & 1     & 1     & 0     & 1      & 1      \\ \hline
+  0     & 1     & 1     & 1     & 0      & 0      \\ \hline
+  0     & 1     & 0     & 1     & 1      & 0      \\ \hline
+  0     & 1     & 0     & 0     & 0      & 1      \\ \hline
+  1     & 1     & 0     & 0     & 1      & 1      \\ \hline
+  1     & 1     & 0     & 1     & 0      & 0      \\ \hline
+  1     & 1     & 1     & 1     & 1      & 0      \\ \hline
+  1     & 1     & 1     & 0     & 0      & 1      \\ \hline
+  1     & 0     & 1     & 0     & 0      & 0      \\ \hline
+  1     & 0     & 1     & 1     & 0      & 1      \\ \hline
+  1     & 0     & 0     & 1     & 1      & 1      \\ \hline
+  1     & 0     & 0     & 0     & 1      & 0      \\ \hline
+  \end{tabular}
+\end{table}
 
 \subsection*{(3)}
+カルノー図は次の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2018_karnaugh.png}
+\end{figure}
+
+よって加法標準形は
+\begin{equation*}
+  \begin{split}
+    S_1'
+      &= I_1 \overline{S_1} \overline{S_0} + I_1 \overline{I_0} \overline{S_1} + \overline{I_1} \overline{I_0} S_1 + \overline{I_1} S_0 \overline{S_0} + \overline{I_1}I_0 \overline{S_1}S_0 + I_1 I_0 S_1 S_0 \\
+    S_0'
+      &= \overline{I_0}S_0 + I_0 \overline{S_0}
+  \end{split}
+\end{equation*}
 
 \subsection*{(4)}
+求める回路は次の通り。
+TODO
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=11cm]{images/2018_4_circuit.png}
+% \end{figure}
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
