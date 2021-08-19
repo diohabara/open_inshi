@@ -1,0 +1,181 @@
+% class
+\documentclass[a4paper,12pt,xelatex,ja=standard]{bxjsarticle}
+
+% packages
+%% mathematical notations
+\usepackage{amsthm,amsmath,amssymb,amsfonts} % mathematical notations
+\usepackage{bm} % bold character
+\usepackage{latexsym} % more mathematical notations
+\usepackage{physics} % physical notations
+\usepackage{mathtools} % math tools
+%% graphs
+\usepackage{graphicx, xcolor} % graph
+\usepackage{circuitikz} % for circuit elements
+\usepackage{float} % positioning of graphs
+\usepackage{siunitx} % SI units
+\usepackage{tikz} % graphic elements
+\usepackage{wrapfig} % must be after float package.
+\usepackage{askmaps} % Karnaugh map
+%% type system
+\usepackage{bussproofs} % proof tree
+%% code
+\usepackage[ruled,vlined]{algorithm2e} % pseudo code
+\usepackage{listings} % source code
+\usepackage{inconsolata}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  frame={tb}
+}
+\usetikzlibrary{automata, positioning, calc, quotes}
+\tikzset{
+  ->,
+  >={Stealth[round]},
+  auto,
+  every state/.style={draw},
+  node distance=3cm
+}
+\newcommand\DoubleLine[5][4pt]{%
+    \path(#2)--(#3)coordinate[at start](h1)coordinate[at end](h2);
+    \draw[<-,very thick,black] ($(h1)!#1!90:(h2)$)  to ["#4"]   ($(h2)!#1!-90:(h1)$);
+    \draw[->,very thick,  red] ($(h1)!#1!-90:(h2)$) to ["#5" '] ($(h2)!#1!90:(h1)$);
+    }
+
+% Basic information
+\title{電子情報学専攻 \, 専門 \\ 平成30年 \, 解答･解説}
+\author{diohabara}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{第1問\ 電気･電子回路}
+
+\section*{第2問\ 計算機アーキテクチャ}
+\subsection*{(1)}
+\begin{enumerate}
+  \item 例外処理が発生する
+  \item OSに処理が移る
+  \item OSはページテーブルを参照し、LRUページを選択しそのページをディスクに書き戻す
+  \item 下記戻したページを置換してアクセスした仮想ページを主記憶上に載せる
+\end{enumerate}
+
+\subsection*{(2)}
+$2^{48} \divisionsymbol 2^{12} \times 2^3 = 2^3 \times (2^{12})^3 = 512\text{[GB]}$
+
+\subsection*{(3)}
+すべてのページについてページテーブルを主記憶に載せるため、あまり参照されないページも含まれており無駄が多い。これにより(2)のように必要な主記憶のサイズが膨大になる。
+
+\subsection*{(4)}
+レベル2のページテーブルについては1部のみを主記憶上に載せ、残りは2次記憶に置くことによって、主記憶上のページテーブルが占めるサイズを削減し、無駄に主記憶の容量を占めることがなくなる。
+
+\subsection*{(5)}
+\begin{enumerate}
+  \item ページテーブルが参照される
+  \item 仮想ページアドレスに対応する物理ページアドレスがTLBのエントリに入れられる
+  \item TLBに空いているエントリがなければLRUエントリが置換される
+\end{enumerate}
+
+\subsection*{(5)}
+\subsubsection*{TLBがヒットする際にしないときと比べて主記憶へのアクセス回数が減少する理由}
+MMU内にTLBが配置されている場合、TLBがヒットすれば主記憶にアクセスすることなく物理ページアドレスに変換できるから。TLBミスが起こると主記憶上のページテーブルにアクセスする必要が生じる。
+
+\subsubsection*{マルチレベルページテーブルの主記憶へのアクセス回数の変化}
+マルチレベルのページテーブルを用いるとページテーブルを参照する際に階層の数だけアクセス回数が増える。
+
+\section*{第3問\ アルゴリズムとデータ構造}
+\subsection*{(1)}
+TODO: 過程\\
+\begin{equation*}
+  \begin{split}
+    v_1.d = 1 \\
+    v_2.d = 4 \\
+    v_3.d = 2 \\
+    v_4.d = 6
+  \end{split}
+\end{equation*}
+
+\subsection*{(2)}
+(A): $u.d + d_{uv}$
+
+\subsection*{(3)}
+$v.d = (A)$の次の行に$v.pre = u$を追加する。頂点sから頂点vまでの頂点集合を求めるときは、vがsに等しくなるまで$v = v.pre$を繰り返せば良い。
+
+\subsection*{(4)}
+すべての辺($|E|$本)について緩和($O(1)$)を$|V| - 1$回繰り返すので求める時間計算量は$(|V||E|)$
+
+\subsection*{(5)}
+\subsubsection*{説明}
+二分ヒープをheapと表す。初期状態では、始点を覗いたすべての頂点vについて$v.d = \infty$とし、heapに始点を追加する。heapが空になるまで以下の操作を繰り返す。
+
+\begin{enumerate}
+  \item heapからv.dが最小であるような頂点vを取り出し、heapから削除する
+  \item vから辺で直接結ばれた各頂点uについて$u.d > v.d + d_{vu}$ならば$u.d = v.d + d_{vu}$と更新する。この際に、最短経路長が更新された頂点uを新たにheapに追加する
+\end{enumerate}
+
+\subsubsection*{時間計算量}
+はじめにすべての頂点を二分ヒープに追加する部分が$O(|V| \log |V|)$、距離を更新する回数が$O(|E|)$回で、このときに二分ヒープへの追加が行われるので$O(|E| \log |V|)$、二分ヒープから頂点を削除する回数は追加した回数に等しいので$O(|V| + |E|)$回。これら合わせて計算量は$((|E| + |V|) \log |V|)$。
+
+\section*{第4問\ ネットワーク}
+
+\section*{第5問\ 信号処理}
+\subsection*{(1)}
+$\delta_s(t) = \sum^{\infty}_{i = - \infty} \delta(t - it_s)$を1周期分$\left( -\frac{t_s}{2} \leq t < \frac{t_s}{2}\right)$切り出して、係数を求める。\\
+問題文にもあるように係数を求める式は次の通り。
+
+\[
+  C_i = \frac{1}{T}\int^{T/2}_{-T/2}f(t) e^{-j \frac{2 \pi i t}{T}}dt
+\]
+この場合、$T = t_s$、$f(t) = \delta(t)$なので、これを代入して
+
+\begin{equation*}
+  \begin{split}
+    c_i
+      &= \frac{1}{t_s}\int^{t_s/2}_{-t_s/2}f(t) e^{-j \frac{2 \pi i t}{t_s}}dt \\
+      &= \frac{1}{t_s} \cdot 1 = \frac{1}{t_s}
+  \end{split}
+\end{equation*}
+
+よって、係数は等しく$\frac{1}{t_s}$であり、フーリエ級数展開の結果は
+
+\[
+  \delta_s(t) = \sum^{\infty}_{i = -\infty}\frac{1}{t_s}e^{j \frac{2 \pi i t}{t_s}}
+\]
+
+\subsection*{(2)}
+(1)の結果をフーリエ変換の公式に代入する。
+\begin{equation*}
+  \begin{split}
+    \Delta_s(\omega)
+      &= \int^{\infty}_{-\infty}\delta_s(t)e^{- j \omega t}dt \\
+      &= \int^{\infty}_{-\infty}\left\{\sum^{\infty}_{i = -\infty} \frac{1}{t_s}e^{j \frac{2 pi i t}{t_s}}\right\} \\
+      &= \frac{1}{t_s} \sum^{\infty}_{\infty}\left\{\int^{\infty}_{-\infty} e^{-j(\omega - i\omega_s)t}\right\} \\
+      &= \frac{1}{t_s} \sum^{\infty}_{\i= -\infty}2\pi \delta(\omega - i \omega_s) \\
+      &= \omega_s \sum^{\infty}_{i = -\infty}\delta(\omega - i \omega_s)
+  \end{split}
+\end{equation*}
+
+\subsection*{(3)}
+$f_s(t) = f(t) \cdot \delta_s(t)$の両辺をフーリエ変換する。\\
+下の計算では和と積分の入れ替えや、(2)で得た結論や、畳込みの定義式やフーリエ変換を使った。
+
+\begin{equation*}
+  \begin{split}
+    F_s(\omega)
+      &= \frac{1}{2 \pi}F(\omega) * \Delta_s(\omega) \\
+      &= \frac{1}{t_s}F(\omega) * \left(\sum^{\infty}_{i = -\infty}\delta(\omega - i \omega_s)\right) \\
+      &= \frac{1}{t_s} \sum^{\infty}_{i = - \infty} \left(\int^{\infty}_{-\infty}F(\omega')\delta(\omega - i\omega_s - \omega') d\omega'\right) \\
+      &= \frac{1}{t_s} \sum^{\infty}_{i = - \infty} F(\omega - i\omega_s) \\
+  \end{split}
+\end{equation*}
+
+\subsection*{(4)}
+\subsubsection*{エイリアシングの定義}
+エイリアシングとは、サンプリングに従って信号の1部が本来の周波数とは異なる周波数の成分として混入してしまい、波形に歪みが生じることを言う。\\
+
+\subsubsection*{(3)においてどのような減少となるの}
+サンプリング周波数$\omega_s$に対して周波数$\omega, \omega \pm \omega_s, \omega \pm 2\omega, \dots$の成分がすべて$F_s(\omega)$上の同じ点に重なってしまうため、サンプリング後の信号$F_s(\omega)$を見たときに$F(\omega)$のどこの周波数由来なのか判別不可能になる。
+
+\subsubsection*{$F(\omega)$が満足すべき条件}
+$\omega > \frac{\omega_s}{2}$において$F(\omega) = 0$を満たすこと。
+\end{document}
