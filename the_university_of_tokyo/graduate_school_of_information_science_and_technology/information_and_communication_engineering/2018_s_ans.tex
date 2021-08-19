@@ -134,16 +134,39 @@ TODO
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
+GDFEA
 
 \subsection*{(2)}
+B, C, A, E, F, D, G
 
 \subsection*{(3)}
+ソフトウェアの依存関係の解決。\\
+ソフトAをインストールした後でないとソフトBをインストールできないなど、インストールをする順番がある場合、この依存関係を有向グラフで表し、トポロジカルソートを求めることで依存関係を解決してインストールができる。
 
 \subsection*{(4)}
+\begin{lstlisting}[caption=DFSの擬似コード]
+function DFS(Vertex u)
+  visited[u] = TRUE
+  foreach v in Adj[u]
+    if visited[v] != TRUE
+      DFS(v)
+  s.push(u)
+\end{lstlisting}
 
 \subsection*{(5)}
+$|V|$の頂点それぞれについて1度だけDFSが呼び出され、$|E|$の辺がそれぞれ1度ずつ参照されるので求める時間計算量は$O(|V| + |E|)$となる。
 
 \subsection*{(6)}
+\subsubsection*{アルゴリズム}
+各頂点の入次数を表す配列degreeと、入次数が0の頂点集合を保持するキューQと、トポロジカルソートの順に頂点を格納するキューSを用意する。まず、すべての頂点について、入ってくる辺の本数を数えdegreeに記録して、degree[v] = 0であるような頂点vをすべてQにpushする。そして、Qが空になるまで以下の操作を繰り返す。
+\begin{itemize}
+  \item Qから頂点uを取り出し、Sにpushする
+  \item 頂点uから出ているすべての辺(u, v)について、degree[v]を1減らす。このとき、degree[v]が0となった場合は、頂点vをQにpushする
+\end{itemize}
+この操作が終了したとき、Sに頂点を追加した順番がトポロジカルソートとなっている。
+
+\subsubsection*{時間計算量}
+辺を参照する回数はdegreeの前計算の際に$|E|$回と操作1~2の際に$|E|$で合わせて$2|E|$回。Qへのpush･popの回数とSへのpushの回数はそれぞれ$|V|$回なので、このアルゴリズムの時間計算量は$O(|V| + |E|)$となる。
 
 \section*{第4問\ ネットワーク}
 
