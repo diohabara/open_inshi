@@ -85,10 +85,36 @@ MMU内にTLBが配置されている場合、TLBがヒットすれば主記憶�
 
 \section*{第3問\ アルゴリズムとデータ構造}
 \subsection*{(1)}
+TODO: 過程\\
+\begin{equation*}
+  \begin{split}
+    v_1.d = 1 \\
+    v_2.d = 4 \\
+    v_3.d = 2 \\
+    v_4.d = 6
+  \end{split}
+\end{equation*}
+
 \subsection*{(2)}
+(A): $u.d + d_{uv}$
+
 \subsection*{(3)}
+$v.d = (A)$の次の行に$v.pre = u$を追加する。頂点sから頂点vまでの頂点集合を求めるときは、vがsに等しくなるまで$v = v.pre$を繰り返せば良い。
+
 \subsection*{(4)}
+すべての辺($|E|$本)について緩和($O(1)$)を$|V| - 1$回繰り返すので求める時間計算量は$(|V||E|)$
+
 \subsection*{(5)}
+\subsubsection*{説明}
+二分ヒープをheapと表す。初期状態では、始点を覗いたすべての頂点vについて$v.d = \infty$とし、heapに始点を追加する。heapが空になるまで以下の操作を繰り返す。
+
+\begin{enumerate}
+  \item heapからv.dが最小であるような頂点vを取り出し、heapから削除する
+  \item vから辺で直接結ばれた各頂点uについて$u.d > v.d + d_{vu}$ならば$u.d = v.d + d_{vu}$と更新する。この際に、最短経路長が更新された頂点uを新たにheapに追加する
+\end{enumerate}
+
+\subsubsection*{時間計算量}
+はじめにすべての頂点を二分ヒープに追加する部分が$O(|V| \log |V|)$、距離を更新する回数が$O(|E|)$回で、このときに二分ヒープへの追加が行われるので$O(|E| \log |V|)$、二分ヒープから頂点を削除する回数は追加した回数に等しいので$O(|V| + |E|)$回。これら合わせて計算量は$((|E| + |V|) \log |V|)$。
 
 \section*{第4問\ ネットワーク}
 
