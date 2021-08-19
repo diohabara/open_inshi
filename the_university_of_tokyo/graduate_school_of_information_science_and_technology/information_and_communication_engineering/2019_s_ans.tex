@@ -120,8 +120,62 @@ $v.d = (A)$の次の行に$v.pre = u$を追加する。頂点sから頂点vま�
 
 \section*{第5問\ 信号処理}
 \subsection*{(1)}
-\subsection*{(2)}
-\subsection*{(3)}
-\subsection*{(4)}
+$\delta_s(t) = \sum^{\infty}_{i = - \infty} \delta(t - it_s)$を1周期分$\left( -\frac{t_s}{2} \leq t < \frac{t_s}{2}\right)$切り出して、係数を求める。\\
+問題文にもあるように係数を求める式は次の通り。
 
+\[
+  C_i = \frac{1}{T}\int^{T/2}_{-T/2}f(t) e^{-j \frac{2 \pi i t}{T}}dt
+\]
+この場合、$T = t_s$、$f(t) = \delta(t)$なので、これを代入して
+
+\begin{equation*}
+  \begin{split}
+    c_i
+      &= \frac{1}{t_s}\int^{t_s/2}_{-t_s/2}f(t) e^{-j \frac{2 \pi i t}{t_s}}dt \\
+      &= \frac{1}{t_s} \cdot 1 = \frac{1}{t_s}
+  \end{split}
+\end{equation*}
+
+よって、係数は等しく$\frac{1}{t_s}$であり、フーリエ級数展開の結果は
+
+\[
+  \delta_s(t) = \sum^{\infty}_{i = -\infty}\frac{1}{t_s}e^{j \frac{2 \pi i t}{t_s}}
+\]
+
+\subsection*{(2)}
+(1)の結果をフーリエ変換の公式に代入する。
+\begin{equation*}
+  \begin{split}
+    \Delta_s(\omega)
+      &= \int^{\infty}_{-\infty}\delta_s(t)e^{- j \omega t}dt \\
+      &= \int^{\infty}_{-\infty}\left\{\sum^{\infty}_{i = -\infty} \frac{1}{t_s}e^{j \frac{2 pi i t}{t_s}}\right\} \\
+      &= \frac{1}{t_s} \sum^{\infty}_{\infty}\left\{\int^{\infty}_{-\infty} e^{-j(\omega - i\omega_s)t}\right\} \\
+      &= \frac{1}{t_s} \sum^{\infty}_{\i= -\infty}2\pi \delta(\omega - i \omega_s) \\
+      &= \omega_s \sum^{\infty}_{i = -\infty}\delta(\omega - i \omega_s)
+  \end{split}
+\end{equation*}
+
+\subsection*{(3)}
+$f_s(t) = f(t) \cdot \delta_s(t)$の両辺をフーリエ変換する。\\
+下の計算では和と積分の入れ替えや、(2)で得た結論や、畳込みの定義式やフーリエ変換を使った。
+
+\begin{equation*}
+  \begin{split}
+    F_s(\omega)
+      &= \frac{1}{2 \pi}F(\omega) * \Delta_s(\omega) \\
+      &= \frac{1}{t_s}F(\omega) * \left(\sum^{\infty}_{i = -\infty}\delta(\omega - i \omega_s)\right) \\
+      &= \frac{1}{t_s} \sum^{\infty}_{i = - \infty} \left(\int^{\infty}_{-\infty}F(\omega')\delta(\omega - i\omega_s - \omega') d\omega'\right) \\
+      &= \frac{1}{t_s} \sum^{\infty}_{i = - \infty} F(\omega - i\omega_s) \\
+  \end{split}
+\end{equation*}
+
+\subsection*{(4)}
+\subsubsection*{エイリアシングの定義}
+エイリアシングとは、サンプリングに従って信号の1部が本来の周波数とは異なる周波数の成分として混入してしまい、波形に歪みが生じることを言う。\\
+
+\subsubsection*{(3)においてどのような減少となるの}
+サンプリング周波数$\omega_s$に対して周波数$\omega, \omega \pm \omega_s, \omega \pm 2\omega, \dots$の成分がすべて$F_s(\omega)$上の同じ点に重なってしまうため、サンプリング後の信号$F_s(\omega)$を見たときに$F(\omega)$のどこの周波数由来なのか判別不可能になる。
+
+\subsubsection*{$F(\omega)$が満足すべき条件}
+$\omega > \frac{\omega_s}{2}$において$F(\omega) = 0$を満たすこと。
 \end{document}
