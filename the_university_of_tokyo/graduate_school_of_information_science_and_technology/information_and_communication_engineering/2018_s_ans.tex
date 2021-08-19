@@ -172,15 +172,112 @@ $|V|$の頂点それぞれについて1度だけDFSが呼び出され、$|E|$の
 
 \section*{第5問\ 信号処理}
 \subsection*{(1)}
+片側Z変換の定義は
+\[
+  X(z) = \sum^{\infty}_{n=0}x(n)z^{-n}
+\]
 
 \subsection*{(2)}
+抵抗部分のインピーダンスはR、キャパシタ部分のインピーダンスは$\frac{1}{j\omega C}=\frac{1}{sC}$となるので、
+
+\begin{equation*}
+  \begin{split}
+    &V_{out}(s) = \frac{\frac{1}{sC}}{R + \frac{1}{sC}}V_{in}(s)\\
+    &H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{1}{1 + sRC} = \frac{1}{1 + s}
+  \end{split}
+\end{equation*}
+
+と求められる。
 
 \subsection*{(3)}
+$z=e^{sT}$から導出したい式は
+\begin{equation*}
+  s \approx \frac{2}{T} \frac{1 - z^{-1}}{1 + z^{-1}}
+\end{equation*}
+これを直接導こうとすると大変なので、これをzについて解いた形に変形する。
+
+\begin{equation*}
+  \begin{split}
+    &\frac{sT}{2} \approx \frac{1 - z^{-1}}{1 + z^{-}} \\
+    &1 + \frac{sT}{2} \approx \frac{2}{1 + z^{-1}} \\
+    &1 - \frac{sT}{2} \approx \frac{2z^{-1}}{1 + z^{-1}}\\
+    &\frac{1 - \frac{sT}{2}}{1 + \frac{sT}{2}} \approx z^{-1} = e^{sT}
+  \end{split}
+\end{equation*}
+
+すると一番下の式は
+
+\begin{equation*}
+  e^{-sT} = \frac{e^{-\frac{sT}{2}}}{e^{\frac{sT}{2}}}
+\end{equation*}
+
+と近似すれば導出が可能なので、これを下から上にたどっていけば求める近似式の導出が可能。
 
 \subsection*{(4)}
+$H(s) = \frac{1}{1+s}$に$s = \frac{2}{T}\frac{1 - z^{-1}}{ 1 + z^{-1}} = 2 \frac{1 - z^{-1}}{1 + z^{-1}}$を代入すると
+
+\begin{equation*}
+  \begin{split}
+    H(z)
+      &= \frac{1}{1 + 2 \frac{1 - z^{-1}}{1 + z^{-1}}} \\
+      &= \frac{1 + z^{-1}}{3 - z^{-1}}
+  \end{split}
+\end{equation*}
+
+と求められる。
 
 \subsection*{(5)}
+入力を$X(z)$、出力を$Y(z)$として方程式を立てると
+
+\begin{equation*}
+  \begin{split}
+    &H(z) = \frac{Y(z)}{X(z)} = \frac{1 + z^{-1}}{3 - z^{-1}} \\
+    &(3 - z^{-1}) Y(z) = (1 + z^{-1})X(z) \\
+    &Y(z) = \frac{1}{3}(X(z) + z^{-1}(X(z) + Y(z)))
+  \end{split}
+\end{equation*}
+
+あとはこれをもとに回路を組めばよく以下の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2018_5_circuit.png}
+\end{figure}
 
 \subsection*{(6)}
+(2)と同様にこの回路におけるH(s)を求める。
+\begin{equation*}
+  \begin{split}
+    &V_{out}(s) = \frac{R}{R + \frac{1}{sC}}V_{in}(s) \\
+    &H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{sRC}{1 + sRC} = \frac{s}{1 + s}
+  \end{split}
+\end{equation*}
+
+(4)と同様に$s = 2 \frac{1 - z^{-1}}{1 + z^{-1}}$を代入すると
+
+\begin{equation*}
+  \begin{split}
+    H(z)
+      &= \frac{2 \frac{1 - z^{-1}}{1 + z^{-1}}}{1 + 2 \frac{1 - z^{-1}}{1 + z^{-1}}} \\
+      &= 2 \frac{1 - z^{-1}}{3 - z^{-1}}
+  \end{split}
+\end{equation*}
+
+(5)と同様に$X(z)$、$Y(z)$の方程式で書き直す。
+
+\begin{equation*}
+  \begin{split}
+    H(z) &= \frac{Y(z)}{X(z)} = 2 \frac{1 - z^{-1}}{3 - z^{-1}}\\
+    (3-z^{-1})Y(z) &= 2 (1 - z^{-1})X(z) \\
+    Y(z) &= \frac{1}{3}(2 X(z) + z^{-1}(-2 X(z) + Y(z)))
+  \end{split}
+\end{equation*}
+
+よって、この場合も方程式をもとに回路を組めば良いので以下の通り。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=11cm]{images/2018_6_circuit.png}
+\end{figure}
 
 \end{document}
