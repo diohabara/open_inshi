@@ -293,7 +293,7 @@
 
 \section*{第3問\ アルゴリズム}
   \subsection*{(1)}
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python]
     if CONTAIN-INTEGERS(M, A, i, j) and (j - i <= end - start):
         start = i
         end = j
@@ -323,7 +323,7 @@
   \end{center}
 
   \subsection*{(3)}
-  \begin{lstlisting}[mathescape]
+  \begin{lstlisting}[mathescape, language=Python]
   FIND-SNIPPET(N, M, A):
       start = 0
       end = N
@@ -348,7 +348,7 @@
   区間$[i, j]$で使われていない数を保持するスタックunusedと区間$[i, j]$に含まれる数の個数を保持する配列countを用意する。ただし、添字が数、値がその個数とする。\\
   unusedを$\{0, 1, \dots, M-1\}$で初期化し、countはすべての要素を$0$で初期化する。\\
   CONTAIN-INTEGERSは以下のような関数とする。
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python]
   CONTAIN-INTEGERS(M, A, i, j):
       while stack:
           number = stack.top()
@@ -359,24 +359,17 @@
       return True
   \end{lstlisting}
   そして、iが右にずれるとき
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python]
     count[A[i]] -= 1
     stack.push(A[i])
   \end{lstlisting}
   jが右にずれるとき
-  \begin{lstlisting}
+  \begin{lstlisting}[language=Python]
     count[A[j]] += 1
   \end{lstlisting}
   と処理する。この処理は各ステップが$O(1)$であり、CONTAIN-INTEGERSの処理も全体でO(N)回しか行われず、ならし計算量は$O(1)$となる。
 
 \section*{第4問\ ネットワーク}
-  \subsection*{(1)}
-  \subsection*{(2)}
-  \subsection*{(3)}
-  \subsection*{(4)}
-  \subsection*{(5)}
-    \subsubsection*{(a)}
-    \subsubsection*{(b)}
 
 \section*{第5問\ 情報理論}
   \subsection*{(1)}
@@ -384,9 +377,9 @@
   よって、それぞれの領域の図形の面積を計算して
   \begin{equation*}
     \begin{split}
-      q_1 = q_5 = /frac{1}{2} \cdot 0.4^{2} = \frac{2}{25} \\
-      q_2 = q_4 = /frac{1}{2} \cdot 0.8^{2}  - q_1 = \frac{6}{25} \\
-      q_3 = 1 - (q_1 + q_2 + q_4 + q_5) = \frac{9}{25}
+      q_1 &= q_5 = \frac{1}{2} \cdot 0.4^{2} = \frac{2}{25} \\
+      q_2 &= q_4 = \frac{1}{2} \cdot 0.8^{2}  - q_1 = \frac{6}{25} \\
+      q_3 &= 1 - (q_1 + q_2 + q_4 + q_5) = \frac{9}{25}
     \end{split}
   \end{equation*}
 
@@ -406,7 +399,7 @@
   そして、最後に残ったノードからたどって、左端のノードに戻る際に通ったエッジから符号を決める。上部のエッジを1、下部のエッジを0とする。これを図にすると以下のようになる。
   \begin{figure}[H]
     \centering
-    \includegraphics[width=9cm]{images/huffman_tree2020.png}
+    \includegraphics[width=9cm]{images/2020huffman_tree.png}
   \end{figure}
   よって、2元符号$C_0$は以下のように表せる。
   \begin{center}
