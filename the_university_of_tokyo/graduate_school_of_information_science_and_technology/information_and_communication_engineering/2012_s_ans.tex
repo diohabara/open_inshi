@@ -114,8 +114,8 @@ L3での書き込みレジスタr1とL4での読み込みレジスタr1を新し
     G(\omega)
       &= \int^{\infty}_{-\infty} g(t) e^{-j \omega t} dt \\
       &= \int^{\infty}_{-\infty} \left( \sum^{\infty}_{k = - \infty} \frac{1}{T} e^{j k \omega_0 t} \right)e^{-j \omega t} dt \\
-      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{-j(\omega -k\omega_0)t} dt \\
-      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{-j(\omega -k\omega_0)t} \cdot 1 dt \\
+      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{j(\omega -k\omega_0)t} dt \\
+      &= \frac{1}{T} \sum^{\infty}_{k = - \infty} \int^{\infty}_{-\infty} e^{j(\omega -k\omega_0)t} \cdot 1 dt \\
       &= \frac{1}{T} \sum^{\infty}_{k = - \infty} 2 \pi \delta(\omega - k \omega_0) \\
       &= \omega \sum^{\infty}_{k = - \infty} \delta(\omega - k \omega_0)
   \end{split}
@@ -142,7 +142,7 @@ L3での書き込みレジスタr1とL4での読み込みレジスタr1を新し
 \]
 であり、$o(t)$から時刻$t_0$付近で$N$個の標本値を得るから、$g(t)$もインパルス列との畳み込みとして標本化される。\\
 すると、(2)より、インパルス列のフーリエ変換はインパルス列となるから、$\log | G(\omega) |$もインパルス列となる。以上から、$\log | H(\omega) |$は標本化各周波数は$\omega_0$として$\log |O(\omega)|$の下の包絡線を取れば良い。\\
-こうすると、$\log | O(\omega)$の成分を取り除いたフィルタの特性が現れる。
+こうすると、$\log | O(\omega) |$の成分を取り除いたフィルタの特性が現れる。
 
 \subsection*{(5)}
 $o(t) = s(t) + n(t)$より
@@ -172,7 +172,7 @@ $o(t) = s(t) + n(t)$より
   \end{split}
 \end{equation*}
 
-$Re(S(\omega, t) \overline{N(\omega, t)})$の項は$S(\omega, t)$と$N(\omega, t)$の内積にあたるので、ドクレイツ性より期待値は0に近づく。
+$Re(S(\omega, t) \overline{N(\omega, t)})$の項は$S(\omega, t)$と$N(\omega, t)$の内積にあたるので、独立性より期待値は0に近づく。
 よって、
 \[
   \text{(5-4)} = Re(S(\omega, t) \overline{N(\omega, t)})
