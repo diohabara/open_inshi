@@ -106,6 +106,12 @@
 - [電子情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
 - [数理情報学専攻](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/mathematical_informatics)
 
+### [工学系](./the_university_of_tokyo/graduate_school_of_engineering)
+
+[公式のサンプル問題置き場](https://www.eeis.t.u-tokyo.ac.jp/education/subject.html)
+
+- [電気系工学専攻](./the_university_of_tokyo/graduate_school_of_engineering/eeis)
+
 ### [学際情報学府](./the_university_of_tokyo/graduate_school_of_interdisciplinary_information_studies)
 
 [公式の過去問置き場](http://www.iii.u-tokyo.ac.jp/admissions/master-pastexams)
