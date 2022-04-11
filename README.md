@@ -15,7 +15,7 @@
 
 [sample.tex](sample.tex)を参考にして解答を作る。
 
-## 規約
+## 命名規則
 
 - ディレクトリ名は `_` (アンダーバー)区切りで、できるだけ公式の名前にする。
   - 例: `the_university_of_tokyo`(東京大学)
@@ -35,11 +35,7 @@
 - ブランチを切る。
   - ブランチ名は `{username}/{university_name}{major}{filename}` とする。
     - 例: `diohabara/ut_eeis_2019_s_ans`
-- 解答を `tex` で書く。
-  - `pdf` を手元で確認しても良いが、 `push` するのは `tex` のみ。
-- Pull request を作る。
-- 他の人に見てもらう。
-- 他の人から OK をもらったら merge する。
+- 解答は `tex` で書く。
 
 ## 受験体験記
 
