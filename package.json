@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "textlint": "^11.8.2",
+    "textlint": "^12.1.1",
     "textlint-rule-preset-ja-spacing": "^2.0.2",
     "textlint-rule-preset-ja-technical-writing": "^4.0.1"
   }
