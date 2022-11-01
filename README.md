@@ -50,6 +50,8 @@
 
 ## 受験体験記
 
+**募集中(リンクでも可)**
+
 ## [一橋大学大学院](./hitotsubashi_university)
 
 ### [経済学研究科](./hitotsubashi_university/graduate_school_of_economics)
