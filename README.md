@@ -1,45 +1,54 @@
 # open_inshi
 
-大学院入試の問題とその解答。
+大学院入試の問題とその解答
+
+**注意**
+
+**解答は間違っているかも**
+
+**CIは後で整えるつもりが放置しています**
+
+**そこそこ見られているようなので諸々のプルリク待っています**
 
 ## 環境構築
 
-以下のソフトをインストールしておく。
+以下のソフトをインストールしておく
 
 - [`tectonic`](https://github.com/tectonic-typesetting/tectonic)
+  - LaTeX が コンパイルできれば何でも良いです
 - [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+  - 多分なくても大丈夫
 
-その後、 `npm install` このディレクトリで実行すると `textlint` とそのプリセットルールがインストールされる。
+(その後、 `npm install` このディレクトリで実行すると `textlint` とそのプリセットルールがインストールされる)
 
 ## 参考
 
-[sample.tex](sample.tex)を参考にして解答を作る。
+- [sample.tex](sample.tex)を参考にして解答を作る
 
 ## 命名規則
 
-- ディレクトリ名は `_` (アンダーバー)区切りで、できるだけ公式の名前にする。
+- ディレクトリ名は `_` (アンダーバー)区切りで、できるだけ公式の名前にする
   - 例: `the_university_of_tokyo`(東京大学)
   - 例: `creative_informatics`(創造情報学専攻)
 
-- 問題ファイル名は `year_${season}[_type][_lang].pdf` とする。ただし、西暦で、開催された年度とする。
+- 問題ファイル名は `year_season[_type][_lang].pdf` とする。ただし、西暦で、開催された年度とする
   - 例: `2019_s_1.pdf`(東京大学大学院情報理工学系研究科コンピュータ科学専攻 2020 年度夏入試  専門科目 I)
   - 例: `2014_s_written.pdf`(東京大学大学院情報理工学系研究科創造情報学専攻 2015 年度夏入試筆記)
 
-- 解答ファイル名は問題ファイル名に `_ans` を加える。
+- 解答ファイル名は問題ファイル名に `_ans` を加える
   - 例: `2014_s_written_ans.tex`(上の創造情報学専攻への解答)
-  - `LaTeX`で作り、`PDF`にコンパイルする。
+  - `LaTeX`で作り、`PDF`にコンパイルする
 
 ## 編集方針
 
-- このレポジトリを fork する。
-- ブランチを切る。
-  - ブランチ名は `{username}/{university_name}{major}{filename}` とする。
+- このレポジトリを fork する
+- ブランチを切る
+  - ブランチ名はどの年度のものか分かれば良いです
     - 例: `diohabara/ut_eeis_2019_s_ans`
-- 解答は `tex` で書く。
+- 解答は `LaTeX` で書いて `PDF` と一緒に commit, push する
+- 大体良さそうなら merge します
 
 ## 受験体験記
-
-[体験記一覧](./experience)
 
 ## [一橋大学大学院](./hitotsubashi_university)
 
@@ -124,7 +133,7 @@
 
 - [情報工学系](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_computer_science)
 
-  > R2年度は筆答試験を実施しなかったため、問題を掲載しません。
+  > R2年度は筆答試験を実施しなかったため、問題を掲載しません
 
 ## [筑波大学大学院](./university_of_tsukuba)
 
@@ -134,7 +143,7 @@
 
 - [コンピュータサイエンス専攻](./university_of_tsukuba/graduate_school_of_science_and_technology/department_of_computer_science)
 
-  > 令和2年度(令和元年度実施)入試から、基礎学力（数学、情報基礎）は、口述試験で試問します。出題範囲や口述試験の説明は、[このページ](https://www.cs.tsukuba.ac.jp/admission.html)をご覧ください。
+  > 令和2年度(令和元年度実施)入試から、基礎学力（数学、情報基礎）は、口述試験で試問します。出題範囲や口述試験の説明は、[このページ](https://www.cs.tsukuba.ac.jp/admission.html)をご覧ください
 
 ## [早稲田大学大学院](./waseda_university)
 
