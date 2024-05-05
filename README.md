@@ -36,9 +36,6 @@
   - [創造情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
   - [電子情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
   - [数理情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/mathematical_informatics)
-- 東京大学大学院学際情報学府
-  - [公式の過去問置き場](http://www.iii.u-tokyo.ac.jp/admissions/master-pastexams)
-  - [総合分析情報学コース](./the_university_of_tokyo/graduate_school_of_interdisciplinary_information_studies/applied_computer_science_course)
 - 東京科学大学(東京工業大学)大学院情報理工学院
   - [公式の過去問置き場](https://www.titech.ac.jp/graduate_school/admissions/past_exam_papers.html)
   - [数理･計算科学系](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_mathematical_and_computing_science)
@@ -51,7 +48,6 @@
 - 京都大学経済学研究科
   - [公式の過去問置き場](https://www.econ.kyoto-u.ac.jp/top/in-kakomon/)
   - [京都大学経済学研究科の過去問・解答](./kyoto_university/graduate_school_of_economics)
-  - **現在(2024 年現在)は筆記試験が行われていないようです**
 - 京都大学大学院情報学研究科
   - [公式の過去問置き場](https://www.i.kyoto-u.ac.jp/admission/guide.html)
   - [数理工学専攻の過去問・解答](./kyoto_university/graduate_school_of_informatics/department_of_applied_mathematics_and_physics)
@@ -64,9 +60,6 @@
   - [コンピュータサイエンス専攻･情報システム工学専攻･情報ネットワーク学専攻･マルチメディア工学専攻･バイオ情報工学専攻の過去問・解答](./osaka_university/graduate_school_of_information_science_and_technology/others)
 - 早稲田大学大学院経済学研究科
   - [公式の過去問置き場](https://www.waseda.jp/inst/admission/graduate/past_test/)
-- 筑波大学大学院システム情報工学研究科
-  - [公式の過去問置き場](https://www.cs.tsukuba.ac.jp/admission/past-exam.html)
-  - [コンピュータサイエンス専攻](./university_of_tsukuba/graduate_school_of_science_and_technology/department_of_computer_science)
 - 一橋大学経済学研究科
   - [公式の過去問置き場](https://www.econ.hit-u.ac.jp/jpn/page/examinee/graduate_admissions/past_exam.html)
   - [一橋大学大学院経済学研究科の過去問・解答](./hitotsubashi_university/graduate_school_of_economics)
@@ -76,6 +69,12 @@
 - 東京大学大学院総合文化研究科
   - [公式の過去問置き場](https://system.c.u-tokyo.ac.jp/p-graduate/guide.html)
   - [広域科学システムの過去問・解答](./the_university_of_tokyo/graduate_school_of_arts_and_sciences/department_of_general_systems_studies)
+- 東京大学大学院学際情報学府
+  - [公式の過去問置き場](http://www.iii.u-tokyo.ac.jp/admissions/master-pastexams)
+  - [総合分析情報学コース](./the_university_of_tokyo/graduate_school_of_interdisciplinary_information_studies/applied_computer_science_course)
+- 筑波大学大学院システム情報工学研究科
+  - [公式の過去問置き場](https://www.cs.tsukuba.ac.jp/admission/past-exam.html)
+  - [コンピュータサイエンス専攻](./university_of_tsukuba/graduate_school_of_science_and_technology/department_of_computer_science)
 - 早稲田大学大学院基幹理工学研究科
   - [公式の過去問置き場](https://www.waseda.jp/inst/admission/graduate/past_test/)
   - [情報理工･情報通信専攻の過去問と解答](./waseda_university/graduate_school_of_fundamental_science_and_engineering/department_of_communications_and_computer_engineering)
