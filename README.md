@@ -35,9 +35,9 @@
   - [情報基礎数学専攻の過去問・解答](./osaka_university/graduate_school_of_information_science_and_technology/department_of_information_and_physical_sciences)
   - [情報数理学専攻の過去問・解答](./osaka_university/graduate_school_of_information_science_and_technology/department_of_pure_and_applied_mathematics)
   - [コンピュータサイエンス専攻･情報システム工学専攻･情報ネットワーク学専攻･マルチメディア工学専攻･バイオ情報工学専攻の過去問・解答](./osaka_university/graduate_school_of_information_science_and_technology/others)
-- 東京大学大学院総合文化研究科
-  - [公式の過去問置き場](https://system.c.u-tokyo.ac.jp/p-graduate/guide.html)
-  - [広域科学システムの過去問・解答](./the_university_of_tokyo/graduate_school_of_arts_and_sciences/department_of_general_systems_studies)
+- 東京大学大学院工学系
+  - [公式のサンプル問題置き場](https://www.eeis.t.u-tokyo.ac.jp/education/subject.html)
+  - [電気系工学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_engineering/eeis)
 - 東京大学大学院情報理工学系研究科
   - [公式の過去問置き場](https://www.i.u-tokyo.ac.jp/edu/entra/examarchive.shtml)
   - [一般教育科目(数学)の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/math)
@@ -46,9 +46,6 @@
   - [創造情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
   - [電子情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
   - [数理情報学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/mathematical_informatics)
-- 東京大学大学院工学系
-  - [公式のサンプル問題置き場](https://www.eeis.t.u-tokyo.ac.jp/education/subject.html)
-  - [電気系工学専攻の過去問・解答](./the_university_of_tokyo/graduate_school_of_engineering/eeis)
 - 東京大学大学院学際情報学府
   - [公式の過去問置き場](http://www.iii.u-tokyo.ac.jp/admissions/master-pastexams)
   - [総合分析情報学コース](./the_university_of_tokyo/graduate_school_of_interdisciplinary_information_studies/applied_computer_science_course)
@@ -80,3 +77,6 @@
 - 北海道大学経済学研究科
   - [公式の過去問置き場](https://www.econ.hokudai.ac.jp/e_exam/daigakuin/pqc/)
   - [北海道大学経済学研究科の過去問・解答](./hokkaido_university/graduate_school_of_economics_and_business)
+- 東京大学大学院総合文化研究科
+  - [公式の過去問置き場](https://system.c.u-tokyo.ac.jp/p-graduate/guide.html)
+  - [広域科学システムの過去問・解答](./the_university_of_tokyo/graduate_school_of_arts_and_sciences/department_of_general_systems_studies)
