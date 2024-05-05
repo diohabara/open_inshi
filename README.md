@@ -53,8 +53,10 @@
     - 2015-2023
 - 東京科学大学(東京工業大学)大学院情報理工学院
   - [公式の過去問置き場](https://www.titech.ac.jp/graduate_school/admissions/past_exam_papers.html)
-  - [数理･計算科学系の過去問・解答](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_mathematical_and_computing_science)
   - [情報工学系の過去問・解答](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_computer_science)
+    - 2002-2023
+  - [数理･計算科学系の過去問・解答](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_mathematical_and_computing_science)
+    - 2016-2023
 
 ## 今後は更新しません
 
