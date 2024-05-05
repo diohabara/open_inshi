@@ -80,3 +80,10 @@
 - 東京大学大学院総合文化研究科
   - [公式の過去問置き場](https://system.c.u-tokyo.ac.jp/p-graduate/guide.html)
   - [広域科学システムの過去問・解答](./the_university_of_tokyo/graduate_school_of_arts_and_sciences/department_of_general_systems_studies)
+
+## 想定質疑応答
+
+- Q: なぜ東京大学大学院情報理工学研究科システム情報学専攻の過去問がないですか？
+  - A: 他の専攻の過去問で受験が可能であり、過去問が[diohabara](https://github.com/diohabara)の興味の対象外であるためです。
+- Q: xxx 大学の過去問がないのはなぜですか？
+  - A: [diohabara](https://github.com/diohara)の興味の対象外であるためです。
