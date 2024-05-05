@@ -65,17 +65,18 @@
 
 筆記試験が行われなくなった等の理由で、今後は更新しません。
 
-- [京都大学経済学研究科の過去問解答](./kyoto_university/graduate_school_of_economics)
+- 京都大学経済学研究科
   - [公式の過去問置き場](https://www.econ.kyoto-u.ac.jp/top/in-kakomon/)
+  - [京都大学経済学研究科の過去問・解答](./kyoto_university/graduate_school_of_economics)
   - **現在(2024 年現在)は筆記試験が行われていないようです**
 - 早稲田大学大学院経済学研究科
   - [公式の過去問置き場](https://www.waseda.jp/inst/admission/graduate/past_test/)
 - 筑波大学大学院システム情報工学研究科
   - [公式の過去問置き場](https://www.cs.tsukuba.ac.jp/admission/past-exam.html)
   - [コンピュータサイエンス専攻](./university_of_tsukuba/graduate_school_of_science_and_technology/department_of_computer_science)
-- 一橋大学
+- 一橋大学経済学研究科
   - [公式の過去問置き場](https://www.econ.hit-u.ac.jp/jpn/page/examinee/graduate_admissions/past_exam.html)
   - [一橋大学大学院経済学研究科の過去問・解答](./hitotsubashi_university/graduate_school_of_economics)
-- 北海道大学
+- 北海道大学経済学研究科
   - [公式の過去問置き場](https://www.econ.hokudai.ac.jp/e_exam/daigakuin/pqc/)
   - [北海道大学経済学研究科の過去問・解答](./hokkaido_university/graduate_school_of_economics_and_business)
