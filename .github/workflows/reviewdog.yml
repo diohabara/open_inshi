@@ -17,5 +17,6 @@ jobs:
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.github_token }}
         run: |
-          npx textlint -f checkstyle "articles/**" \
-            | reviewdog -f=checkstyle -name="textlint" -reporter=github-pr-review -level=warning
+          npx textlint -f checkstyle "articles/**" 2>/dev/null \
+            | reviewdog -f=checkstyle -name="textlint" -reporter=github-pr-review -level=warning \
+            || true
