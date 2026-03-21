@@ -8,10 +8,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - name: textlint-github-pr-review
-        uses: tsuyoshicho/action-textlint@v3
+      - uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
-          textlint_flags: "articles/**"
+          node-version: "20"
+      - run: npm install
+      - uses: reviewdog/action-setup@v1
+      - name: textlint
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.github_token }}
+        run: |
+          npx textlint -f checkstyle "articles/**" \
+            | reviewdog -f=checkstyle -name="textlint" -reporter=github-pr-review -level=warning
