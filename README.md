@@ -72,8 +72,9 @@
   - 現行公式ページ、推定 URL、Wayback Machine で公開 PDF を確認できていない
 - 東京大学大学院情報理工学系研究科 一般教育科目(数学): `fy2020`
   - 公式発表で一般教育科目(数学)の筆記試験を実施しないとされている
-- 東京大学大学院情報理工学系研究科 創造情報学専攻: `fy2020`
-  - 公式ページで「掲載しません」とされている
+- 東京大学大学院情報理工学系研究科 創造情報学専攻: `fy2020`, `fy2011_s_en_exam`
+  - `fy2020` は公式ページで「掲載しません」とされている
+  - `fy2011_s_en_exam` は公式ページにリンクがあるが、Wayback Machine に PDF 本体が保存されていない
 - 東京大学大学院情報理工学系研究科 電子情報学専攻: `fy2025`
   - 2027年度入試案内に更新済みの現行公式ページでも、公開済み専門科目は `fy2024` 相当まで
 - 東京科学大学(東京工業大学)大学院情報理工学院 情報工学系: `fy2015`, `fy2020`
@@ -101,7 +102,7 @@
   - [コンピュータ科学専攻の過去問](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/computer_science)
     - 2014-2025
   - [創造情報学専攻の過去問](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/creative_informatics)
-    - 2013-2025
+    - 2005-2025
   - [電子情報学専攻の過去問](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/information_and_communication_engineering)
     - 2008-2024
   - [数理情報学専攻の過去問](./the_university_of_tokyo/graduate_school_of_information_science_and_technology/mathematical_informatics)
