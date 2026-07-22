@@ -1,5 +1,7 @@
 # open_inshi
 
+収録範囲: **fy2000–fy2025**（研究科・専攻ごとに範囲は異なり、連続収録を保証しません）
+
 ## 理念
 
 - 大学院入試の過去問が一部の内部生のみに共有されていることに対して、情報の非対称性を解消するために、過去問をオープンに公開することが目的です。
@@ -80,6 +82,8 @@
 - 東京科学大学(東京工業大学)大学院情報理工学院 情報工学系: `fy2015`, `fy2020`
   - `fy2020` は公式ページで筆答試験を実施しなかったとされている
   - `fy2015` は現行公式ページ、推定 URL、Wayback Machine で公開 PDF を確認できていない
+- 東京科学大学(東京工業大学)大学院情報理工学院 数理･計算科学系: `fy2015`
+  - 旧公式サイトの `fy2000`–`fy2014` 相当と現行公式ページの `fy2016` 以降の間にあり、Wayback Machine で公開 PDF を確認できていない
 
 - 慶應義塾大学大学院経済学研究科
   - [公式の過去問置き場](https://www.keio.ac.jp/ja/admissions/grad/master/past-exams/)
@@ -112,7 +116,7 @@
   - [情報工学系の過去問](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_computer_science)
     - 2002-2024
   - [数理･計算科学系の過去問](./tokyo_institute_of_technology/graduate_school_of_information_science_and_engineering/department_of_mathematical_and_computing_science)
-    - 2016-2025
+    - 2000-2025
 
 ## 今後は更新しません
 
